@@ -12,7 +12,10 @@ object SystemUtils {
             osName.startsWith("Windows") ->
                 "windows-amd64"
             osName.startsWith("Mac OS X") ->
-                "darwin-amd64"
+                when (osArch) {
+                    "aarch64" -> "darwin-arm64"
+                    else -> "darwin-amd64"
+                }
             osName.startsWith("Linux") ->
                 when (osArch) {
                     "amd64" -> "linux-amd64"
