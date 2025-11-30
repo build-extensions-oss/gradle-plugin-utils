@@ -1,8 +1,7 @@
-import com.vanniktech.maven.publish.KotlinJvm
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
-import java.net.URI
 
 plugins {
+    signing
     kotlin("jvm") apply false
     alias(libs.plugins.com.vanniktech.maven.publish) apply false
 }

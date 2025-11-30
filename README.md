@@ -17,3 +17,7 @@ mavenCentralUsername=???
 mavenCentralPassword=???
 ```
 1. And then the following task will work: `./gradlew publishToMavenCentral --stacktrace`
+
+## Signing
+
+Maven publication GPG key signature: `7A3E779E5DC017B1F11F651B7BC726143958AFEC`.
