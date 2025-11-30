@@ -1,5 +1,9 @@
+import org.gradle.kotlin.dsl.configure
+import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
+
 plugins {
     `java-library`
+    kotlin("jvm")
 }
 /**
 Embedded plugin has common logic for different projects. So, mainly it is here to have an ability to put more code into Gradle files.
@@ -7,7 +11,8 @@ Embedded plugin has common logic for different projects. So, mainly it is here t
 
 // we will lock dependencies on these two configurations. We aren't interested in others, however these ones will be used
 // for local invocation
-val configurationsToLock: List<Configuration> = listOf("runtimeClasspath", "testRuntimeClasspath").map { configurations[it] }
+val configurationsToLock: List<Configuration> =
+    listOf("runtimeClasspath", "testRuntimeClasspath").map { configurations[it] }
 
 // lock selected configurations. The build is failed if they aren't updated
 configurationsToLock.forEach {
@@ -28,4 +33,15 @@ tasks.register("resolveAndLockAll") {
             it.resolve()
         }
     }
+}
+
+
+configure<KotlinJvmProjectExtension> {
+    // fix the toolchain for now
+    jvmToolchain(11)
+}
+
+dependencies {
+    "compileOnly"(kotlin("stdlib"))
+    "compileOnly"(kotlin("stdlib-jdk8"))
 }

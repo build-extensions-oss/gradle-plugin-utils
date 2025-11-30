@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
-
 plugins {
     signing
     kotlin("jvm") apply false
@@ -7,19 +5,6 @@ plugins {
 }
 
 subprojects {
-
-    plugins.withId("org.jetbrains.kotlin.jvm") {
-
-        configure<KotlinJvmProjectExtension> {
-            jvmToolchain(11)
-        }
-
-        dependencies {
-            "compileOnly"(kotlin("stdlib"))
-            "compileOnly"(kotlin("stdlib-jdk8"))
-        }
-    }
-
     plugins.withType<JavaPlugin> {
 
         configure<JavaPluginExtension> {
