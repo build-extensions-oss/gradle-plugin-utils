@@ -26,7 +26,7 @@ subprojects {
 
         configure<JavaPluginExtension> {
             withSourcesJar()
-            withJavadocJar()
+            //withJavadocJar()
         }
 
         tasks.withType<Test> {
