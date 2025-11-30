@@ -7,6 +7,12 @@ plugins {
     id("dependencies-lock")
 }
 
+repositories {
+    // for Gradle dependencies
+    gradlePluginPortal()
+    // for all other jars
+    mavenCentral()
+}
 
 configure<KotlinJvmProjectExtension> {
     // fix the toolchain for now
@@ -14,6 +20,27 @@ configure<KotlinJvmProjectExtension> {
 }
 
 dependencies {
-    "compileOnly"(kotlin("stdlib"))
-    "compileOnly"(kotlin("stdlib-jdk8"))
+    compileOnly(kotlin("stdlib"))
+    compileOnly(kotlin("stdlib-jdk8"))
+}
+
+
+configure<JavaPluginExtension> {
+    withSourcesJar()
+    // We don't publish Javadoc, because it is useless in out case. We publish sources, plus it is easy to find
+    // GitHub project and read the source code. We don't have any comprehensive documentation, so let's just publish nothing.
+    // Additionally, JavaDoc task conflicts with publishing plugin, so let's simply delete one of them.
+    // withJavadocJar()
+}
+
+tasks.withType<Test> {
+    useJUnitPlatform()
+    // store all temporary results inside the Gradle folder
+    val localTempFolder = layout.buildDirectory.dir("tmp").get().asFile
+    systemProperty("java.io.tmpdir", localTempFolder.absolutePath)
+
+    doFirst {
+        // create the folder if needed
+        localTempFolder.mkdirs()
+    }
 }

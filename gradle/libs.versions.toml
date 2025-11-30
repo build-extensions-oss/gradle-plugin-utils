@@ -21,5 +21,7 @@ reflections = { module = "org.reflections:reflections", version.ref = "reflectio
 
 spek-dsl = { module = "org.spekframework.spek2:spek-dsl", version.ref = "spek2" }
 
+# this plugin is referenced in buildSrc
+com-vanniktech-maven-publish-gradle-plugin = { module = "com.vanniktech.maven.publish:com.vanniktech.maven.publish.gradle.plugin", version = "0.34.0" }
+
 [plugins]
-com-vanniktech-maven-publish = { id = "com.vanniktech.maven.publish", version = "0.34.0" }
