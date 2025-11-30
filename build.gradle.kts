@@ -4,7 +4,6 @@ import java.net.URI
 
 plugins {
     kotlin("jvm") apply false
-    id("org.jetbrains.dokka") apply false
     alias(libs.plugins.com.vanniktech.maven.publish) apply false
 }
 
@@ -26,7 +25,10 @@ subprojects {
 
         configure<JavaPluginExtension> {
             withSourcesJar()
-            //withJavadocJar()
+            // We don't publish Javadoc, because it is useless in out case. We publish sources, plus it is easy to find
+            // GitHub project and read the source code. We don't have any comprehensive documentation, so let's just publish nothing.
+            // Additionally, JavaDoc task conflicts with publishing plugin, so let's simply delete one of them.
+            // withJavadocJar()
         }
 
         tasks.withType<Test> {
@@ -86,35 +88,6 @@ subprojects {
             maven {
                 name = "local"
                 url = file(layout.buildDirectory.dir("repos/releases")).toURI()
-            }
-        }
-    }
-
-
-    plugins.withId("org.jetbrains.dokka") {
-
-        val dokkaVersion: String by extra
-
-        dependencies {
-            "dokkaJavadocPlugin"("org.jetbrains.dokka:kotlin-as-java-plugin:$dokkaVersion")
-        }
-
-        tasks.withType<Jar>().matching { it.name == "javadocJar" }
-            .configureEach {
-                from(tasks.named("dokkaJavadoc"))
-            }
-
-        tasks.withType<org.jetbrains.dokka.gradle.DokkaTask> {
-            dependsOn("classes")
-            dokkaSourceSets {
-                named("main") {
-                    sourceLink {
-                        val githubUrl = project.extra["github.url"] as String
-                        localDirectory.set(project.file("src/main/kotlin"))
-                        remoteUrl.set(URI("$githubUrl/tree/master/").toURL())
-                        remoteLineSuffix.set("#L")
-                    }
-                }
             }
         }
     }
