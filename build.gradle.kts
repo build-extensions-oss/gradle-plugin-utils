@@ -1,12 +1,12 @@
+import com.vanniktech.maven.publish.KotlinJvm
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
 import java.net.URI
 
 plugins {
     kotlin("jvm") apply false
     id("org.jetbrains.dokka") apply false
-    id("io.github.gradle-nexus.publish-plugin") version "1.3.0"
+    alias(libs.plugins.com.vanniktech.maven.publish) apply false
 }
-
 
 subprojects {
 
@@ -22,7 +22,6 @@ subprojects {
         }
     }
 
-
     plugins.withType<JavaPlugin> {
 
         configure<JavaPluginExtension> {
@@ -36,6 +35,7 @@ subprojects {
         }
 
         plugins.withType<MavenPublishPlugin> {
+            plugins.apply(com.vanniktech.maven.publish.MavenPublishPlugin::class)
 
             with(the<PublishingExtension>()) {
                 publications.create<MavenPublication>("mavenJava") {
@@ -47,9 +47,6 @@ subprojects {
 
 
     plugins.withType<MavenPublishPlugin> {
-
-        plugins.apply(SigningPlugin::class)
-
         val publishing = the<PublishingExtension>()
 
         publishing.publications.withType<MavenPublication> {
@@ -91,10 +88,6 @@ subprojects {
                 url = file(layout.buildDirectory.dir("repos/releases")).toURI()
             }
         }
-
-        with(the<SigningExtension>()) {
-            sign(publishing.publications)
-        }
     }
 
 
@@ -127,7 +120,3 @@ subprojects {
     }
 }
 
-
-nexusPublishing.repositories {
-    sonatype()
-}

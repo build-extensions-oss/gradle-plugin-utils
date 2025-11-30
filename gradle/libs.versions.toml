@@ -20,3 +20,6 @@ mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 reflections = { module = "org.reflections:reflections", version.ref = "reflections" }
 
 spek-dsl = { module = "org.spekframework.spek2:spek-dsl", version.ref = "spek2" }
+
+[plugins]
+com-vanniktech-maven-publish = { id = "com.vanniktech.maven.publish", version = "0.34.0" }
