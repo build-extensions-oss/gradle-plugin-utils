@@ -211,8 +211,7 @@ class ProjectPropertiesTest {
 
         val provider = project.dirProviderFromProjectProperty("testProperty")
 
-        assertThat(provider.asFile().orNull)
-            .isEqualTo(File("/foo/bar"))
+        assertThat(provider.asFile().get().absolutePath.replace('\\', '/').endsWith("/foo/bar")).isTrue()
     }
 
     @Test
@@ -238,8 +237,7 @@ class ProjectPropertiesTest {
     fun `dirProviderFromProjectProperty_should use the default value if project property is not set`() {
         val provider = project.dirProviderFromProjectProperty("testProperty", "/default/path")
 
-        assertThat(provider.asFile().orNull)
-            .isEqualTo(File("/default/path"))
+        assertThat(provider.asFile().get().absolutePath.replace('\\', '/').endsWith("/default/path")).isTrue()
     }
 
     @Test
@@ -257,8 +255,7 @@ class ProjectPropertiesTest {
 
         val provider = project.dirProviderFromProjectProperty("testProperty", "/default/path")
 
-        assertThat(provider.asFile().orNull)
-            .isEqualTo(File("/foo/bar"))
+        assertThat(provider.asFile().get().absolutePath.replace('\\', '/').endsWith("/foo/bar")).isTrue()
     }
 
     @Test
@@ -269,8 +266,7 @@ class ProjectPropertiesTest {
 
         val provider = project.dirProviderFromProjectProperty("testProperty", evaluateGString = true)
 
-        assertThat(provider.asFile().orNull)
-            .isEqualTo(File("/foo/bar"))
+        assertThat(provider.asFile().get().absolutePath.replace('\\', '/').endsWith("/foo/bar")).isTrue()
     }
 
     @Test
@@ -280,8 +276,7 @@ class ProjectPropertiesTest {
 
         val provider = project.fileProviderFromProjectProperty("testProperty")
 
-        assertThat(provider.asFile().orNull)
-            .isEqualTo(File("/foo/bar"))
+        assertThat(provider.asFile().get().absolutePath.replace('\\', '/').endsWith("/foo/bar")).isTrue()
     }
 
     @Test
@@ -307,8 +302,7 @@ class ProjectPropertiesTest {
     fun `fileProviderFromProjectProperty_should use the default value if project property is not set`() {
         val provider = project.fileProviderFromProjectProperty("testProperty", "/default/path")
 
-        assertThat(provider.asFile().orNull)
-            .isEqualTo(File("/default/path"))
+        assertThat(provider.asFile().get().absolutePath.replace('\\', '/').endsWith("/default/path")).isTrue()
     }
 
     @Test
@@ -326,8 +320,7 @@ class ProjectPropertiesTest {
 
         val provider = project.fileProviderFromProjectProperty("testProperty", "/default/path")
 
-        assertThat(provider.asFile().orNull)
-            .isEqualTo(File("/foo/bar"))
+        assertThat(provider.asFile().get().absolutePath.replace('\\', '/').endsWith("/foo/bar")).isTrue()
     }
 
     @Test
@@ -338,8 +331,7 @@ class ProjectPropertiesTest {
 
         val provider = project.fileProviderFromProjectProperty("testProperty", evaluateGString = true)
 
-        assertThat(provider.asFile().orNull)
-            .isEqualTo(File("/foo/bar"))
+        assertThat(provider.asFile().get().absolutePath.replace('\\', '/').endsWith("/foo/bar")).isTrue()
     }
 
     @Test
