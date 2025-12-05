@@ -1,7 +1,5 @@
 plugins {
-    kotlin("jvm")
-    `java-library`
-    `maven-publish`
+    id("kotlin-convention") // keep shared logic here
 }
 
 
