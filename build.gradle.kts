@@ -1,12 +1,10 @@
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
-import java.net.URI
 
 plugins {
+    signing
     kotlin("jvm") apply false
-    id("org.jetbrains.dokka") apply false
-    id("io.github.gradle-nexus.publish-plugin") version "1.3.0"
+    alias(libs.plugins.com.vanniktech.maven.publish) apply false
 }
-
 
 subprojects {
 
@@ -22,34 +20,29 @@ subprojects {
         }
     }
 
-
     plugins.withType<JavaPlugin> {
 
         configure<JavaPluginExtension> {
             withSourcesJar()
-            withJavadocJar()
+            // We don't publish Javadoc, because it is useless in out case. We publish sources, plus it is easy to find
+            // GitHub project and read the source code. We don't have any comprehensive documentation, so let's just publish nothing.
+            // Additionally, JavaDoc task conflicts with publishing plugin, so let's simply delete one of them.
+            // withJavadocJar()
         }
 
         tasks.withType<Test> {
             useJUnitPlatform()
+            // store all temporary results inside the Gradle folder
             systemProperty("java.io.tmpdir", layout.buildDirectory.dir("tmp"))
         }
 
         plugins.withType<MavenPublishPlugin> {
-
-            with(the<PublishingExtension>()) {
-                publications.create<MavenPublication>("mavenJava") {
-                    from(components["java"])
-                }
-            }
+            plugins.apply(com.vanniktech.maven.publish.MavenPublishPlugin::class)
         }
     }
 
 
     plugins.withType<MavenPublishPlugin> {
-
-        plugins.apply(SigningPlugin::class)
-
         val publishing = the<PublishingExtension>()
 
         publishing.publications.withType<MavenPublication> {
@@ -91,43 +84,6 @@ subprojects {
                 url = file(layout.buildDirectory.dir("repos/releases")).toURI()
             }
         }
-
-        with(the<SigningExtension>()) {
-            sign(publishing.publications)
-        }
-    }
-
-
-    plugins.withId("org.jetbrains.dokka") {
-
-        val dokkaVersion: String by extra
-
-        dependencies {
-            "dokkaJavadocPlugin"("org.jetbrains.dokka:kotlin-as-java-plugin:$dokkaVersion")
-        }
-
-        tasks.withType<Jar>().matching { it.name == "javadocJar" }
-            .configureEach {
-                from(tasks.named("dokkaJavadoc"))
-            }
-
-        tasks.withType<org.jetbrains.dokka.gradle.DokkaTask> {
-            dependsOn("classes")
-            dokkaSourceSets {
-                named("main") {
-                    sourceLink {
-                        val githubUrl = project.extra["github.url"] as String
-                        localDirectory.set(project.file("src/main/kotlin"))
-                        remoteUrl.set(URI("$githubUrl/tree/master/").toURL())
-                        remoteLineSuffix.set("#L")
-                    }
-                }
-            }
-        }
     }
 }
 
-
-nexusPublishing.repositories {
-    sonatype()
-}
