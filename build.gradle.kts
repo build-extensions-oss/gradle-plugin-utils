@@ -32,17 +32,12 @@ subprojects {
 
         tasks.withType<Test> {
             useJUnitPlatform()
+            // store all temporary results inside the Gradle folder
             systemProperty("java.io.tmpdir", layout.buildDirectory.dir("tmp"))
         }
 
         plugins.withType<MavenPublishPlugin> {
             plugins.apply(com.vanniktech.maven.publish.MavenPublishPlugin::class)
-
-            with(the<PublishingExtension>()) {
-                publications.create<MavenPublication>("mavenJava") {
-                    from(components["java"])
-                }
-            }
         }
     }
 
