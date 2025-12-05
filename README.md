@@ -20,4 +20,11 @@ mavenCentralPassword=???
 
 ## Signing
 
-Maven publication GPG key signature: `7A3E779E5DC017B1F11F651B7BC726143958AFEC`.
+Add lines like below into ~/.gradle/gradle.properties:
+```properties
+signing.keyId=F27AB2F4
+signing.password=
+# can be exported via gpg --export-secret-keys -o xxx.gpg
+# see https://stackoverflow.com/a/39573795/185498
+signing.secretKeyRingFile=xxx.gpg
+```
