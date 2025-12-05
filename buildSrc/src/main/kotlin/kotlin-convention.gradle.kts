@@ -5,6 +5,7 @@ plugins {
     `java-library`
     kotlin("jvm")
     id("dependencies-lock")
+    id("dependencies-publishing")
 }
 
 repositories {
