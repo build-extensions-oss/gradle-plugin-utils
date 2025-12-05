@@ -33,7 +33,13 @@ subprojects {
         tasks.withType<Test> {
             useJUnitPlatform()
             // store all temporary results inside the Gradle folder
-            systemProperty("java.io.tmpdir", layout.buildDirectory.dir("tmp"))
+            val localTempFolder = layout.buildDirectory.dir("tmp").get().asFile
+            systemProperty("java.io.tmpdir", localTempFolder.absolutePath)
+
+            doFirst {
+                // create the folder if needed
+                localTempFolder.mkdirs()
+            }
         }
 
         plugins.withType<MavenPublishPlugin> {
