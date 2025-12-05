@@ -19,3 +19,14 @@ tasks {
         dependsOn(getByName("koverXmlReport"))
     }
 }
+
+kover.reports {
+    verify {
+        rule {
+            bound {
+                minValue.set(50)
+                maxValue.set(75)
+            }
+        }
+    }
+}
