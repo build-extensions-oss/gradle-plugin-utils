@@ -43,7 +43,7 @@ jobs:
 
       # Build and publish the project by simply running the command line
       - name: Publish the project
-        run: /gradlew publishToMavenCentral --stacktrace
+        run: ./gradlew publishToMavenCentral --stacktrace
         env:
           ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
           ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
