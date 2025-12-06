@@ -11,10 +11,14 @@ on:
 
 permissions:
   contents: read
+  # kover-report action needs updating the PR report
+  pull-requests: write
 
 jobs:
   gradle:
     strategy:
+      # don't fail immediately - otherwise failing build on Windows will cancel all other builds
+      fail-fast: false
       matrix:
         # build project on some operating systems
         os: [ ubuntu-latest, windows-latest, macos-latest ]
