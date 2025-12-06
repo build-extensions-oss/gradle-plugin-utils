@@ -1,6 +1,7 @@
 import org.gradle.kotlin.dsl.configure
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     `java-library`
@@ -18,9 +19,20 @@ repositories {
 }
 
 configure<KotlinJvmProjectExtension> {
-    // Use the oldest toolchain possible
-    // if Gradle complains - download the JDK. If Gradle can't find it - use property 'org.gradle.java.installations.paths'
-    jvmToolchain(8)
+    // Set the toolchain 11 to do everything, because kotest doesn't support Java 8
+    jvmToolchain(11)
+}
+
+
+tasks.withType<KotlinCompile>().configureEach {
+    // manually decrease the version for releasing classes
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+tasks.withType<JavaCompile>().configureEach {
+    // synchronize Java version with Kotlin compiler
+    options.release.set(8)
 }
 
 dependencies {
