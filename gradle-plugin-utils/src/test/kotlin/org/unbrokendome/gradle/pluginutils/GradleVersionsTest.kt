@@ -10,45 +10,50 @@ import io.kotest.data.forAll
 import io.mockk.mockk
 import io.mockk.verify
 import org.gradle.util.GradleVersion
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.MethodSource
+import org.junit.jupiter.params.provider.ValueSource
 import kotlin.reflect.full.memberProperties
 
+class GradleVersionsTest {
 
-class GradleVersionsTest : DescribeSpec({
+    data class VersionInput(val major: Int, val minor: Int)
 
-    describe("Version constant properties") {
-
-        val allVersionProperties = GradleVersions::class.memberProperties.associateBy { it.name }
-
-        val rows = sequenceOf(
-            4 to 0..10,
-            5 to 0..6,
-            6 to 0..8
-        ).flatMap { (majorVersion, minorRange) ->
-            minorRange.asSequence()
-                .map { minorVersion ->
-                    Row2(majorVersion, minorVersion)
-                }
-        }.toList()
-
-        val dataTable = Table2(Headers2("major", "minor"), rows)
-
-        forAll(dataTable) { major, minor ->
-
-            it("GradleVersions object should have a version property for $major.$minor") {
-
-                val versionPropertyName = "Version_${major}_${minor}"
-                val version = GradleVersion.version("$major.$minor")
-
-                val versionProperty = allVersionProperties[versionPropertyName]
-
-                assertThat(versionProperty, name = "Version property").isNotNull()
-                    .transform { it.get(GradleVersions) }
-                    .isEqualTo(version)
+    companion object {
+        @JvmStatic
+        fun versionsInput() : List<VersionInput> {
+            return listOf(
+                4 to 0..10,
+                5 to 0..6,
+                6 to 0..8
+            ).flatMap { (majorVersion, minorRange) ->
+                minorRange
+                    .map { minorVersion ->
+                        VersionInput(majorVersion, minorVersion)
+                    }
             }
         }
     }
 
+    @ParameterizedTest
+    @MethodSource("versionsInput")
+    fun `GradleVersions object should have a version property`(input: VersionInput) {
+        val allVersionProperties = GradleVersions::class.memberProperties.associateBy { it.name }
 
+        val versionPropertyName = "Version_${input.major}_${input.minor}"
+        val version = GradleVersion.version("${input.major}.${input.minor}")
+
+        val versionProperty = allVersionProperties[versionPropertyName]
+
+        assertThat(versionProperty, name = "Version property").isNotNull()
+            .transform { it.get(GradleVersions) }
+            .isEqualTo(version)
+    }
+}
+
+
+class GradleVersionsTestOld : DescribeSpec({
     val veryHighVersion = GradleVersion.version("9999.99")
 
 
