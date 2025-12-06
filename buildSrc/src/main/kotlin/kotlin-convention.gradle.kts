@@ -1,4 +1,5 @@
 import org.gradle.kotlin.dsl.configure
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
 
 plugins {
@@ -17,8 +18,9 @@ repositories {
 }
 
 configure<KotlinJvmProjectExtension> {
-    // JVM toolchain is for the latest version of Java - let's be prepared for future more than for the past
-    jvmToolchain(17)
+    // Use the oldest toolchain possible
+    // if Gradle complains - download the JDK. If Gradle can't find it - use property 'org.gradle.java.installations.paths'
+    jvmToolchain(8)
 }
 
 dependencies {
