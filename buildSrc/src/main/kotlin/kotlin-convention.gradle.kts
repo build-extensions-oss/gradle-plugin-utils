@@ -22,6 +22,7 @@ configure<KotlinJvmProjectExtension> {
 }
 
 dependencies {
+    // compile only - we will use Gradle dependency in real life
     compileOnly(kotlin("stdlib"))
     compileOnly(kotlin("stdlib-jdk8"))
 }
