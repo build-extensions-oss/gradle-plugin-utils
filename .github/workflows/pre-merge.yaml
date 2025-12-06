@@ -74,5 +74,5 @@ jobs:
           # min-coverage-overall: ???
           # we can't validate this in Gradle - the report must do this on GitHub
           # We aren't ready yet
-          # min-coverage-changed-files: 80
+          min-coverage-changed-files: 90
           coverage-counter-type: LINE
