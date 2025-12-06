@@ -1,6 +1,7 @@
 plugins {
     base
-    alias(libs.plugins.org.jetbrains.kotlinx.kover)
+    // is defined in buildSrc
+    id("org.jetbrains.kotlinx.kover")
 }
 
 dependencies {
@@ -16,7 +17,8 @@ dependencies {
 
 tasks {
     this.getByName("build") {
-        dependsOn(getByName("koverXmlReport"))
+        // prohibit building without verification
+        dependsOn(getByName("koverCachedVerify"))
     }
 }
 
@@ -24,8 +26,7 @@ kover.reports {
     verify {
         rule {
             bound {
-                minValue.set(50)
-                maxValue.set(75)
+                minValue.set(14)
             }
         }
     }

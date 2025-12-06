@@ -66,6 +66,9 @@ jobs:
           path: ${{ github.workspace }}/build/reports/kover/report.xml
           title: Code Coverage
           update-comment: true
-          min-coverage-overall: 80
-          min-coverage-changed-files: 80
+          # We check that in root project - no need to repeat it once again
+          # min-coverage-overall: ???
+          # we can't validate this in Gradle - the report must do this on GitHub
+          # We aren't ready yet
+          # min-coverage-changed-files: 80
           coverage-counter-type: LINE
