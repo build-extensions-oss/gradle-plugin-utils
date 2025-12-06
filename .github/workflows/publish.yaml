@@ -4,6 +4,8 @@ name: Plugin publish
 # https://docs.github.com/en/actions/using-workflows/manually-running-a-workflow
 on:
   workflow_dispatch:
+  release:
+    types: [published]
 
 permissions:
   contents: read
@@ -43,7 +45,8 @@ jobs:
 
       # Build and publish the project by simply running the command line
       - name: Publish the project
-        run: ./gradlew publishToMavenCentral --stacktrace
+        # publish to maven central and additionally correct the version - use it from the tag name (e.g. it should be like 1.2.3 and so on)
+        run: ./gradlew publishToMavenCentral -Pversion=${{ github.event.release.tag_name }} --stacktrace
         env:
           ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
           ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
