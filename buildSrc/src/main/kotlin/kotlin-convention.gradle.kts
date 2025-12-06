@@ -17,8 +17,8 @@ repositories {
 }
 
 configure<KotlinJvmProjectExtension> {
-    // fix the toolchain for now
-    jvmToolchain(11)
+    // JVM toolchain is for the latest version of Java - let's be prepared for future more than for the past
+    jvmToolchain(17)
 }
 
 dependencies {
