@@ -1,19 +1,18 @@
 package org.unbrokendome.gradle.pluginutils
 
 import assertk.assertThat
-import assertk.assertions.*
-import io.kotest.core.spec.style.DescribeSpec
-import io.kotest.data.Headers2
-import io.kotest.data.Row2
-import io.kotest.data.Table2
-import io.kotest.data.forAll
+import assertk.assertions.hasMessage
+import assertk.assertions.isEqualTo
+import assertk.assertions.isFailure
+import assertk.assertions.isInstanceOf
+import assertk.assertions.isNotNull
+import assertk.assertions.isSuccess
 import io.mockk.mockk
 import io.mockk.verify
 import org.gradle.util.GradleVersion
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
-import org.junit.jupiter.params.provider.ValueSource
 import kotlin.reflect.full.memberProperties
 
 class GradleVersionsTest {
@@ -21,8 +20,10 @@ class GradleVersionsTest {
     data class VersionInput(val major: Int, val minor: Int)
 
     companion object {
+        val veryHighVersion = GradleVersion.version("9999.99")!!
+
         @JvmStatic
-        fun versionsInput() : List<VersionInput> {
+        fun versionsInput(): List<VersionInput> {
             return listOf(
                 4 to 0..10,
                 5 to 0..6,
@@ -50,94 +51,76 @@ class GradleVersionsTest {
             .transform { it.get(GradleVersions) }
             .isEqualTo(version)
     }
+
+    @Test
+    fun `checkGradleVersion with message should return normally if the version is ok`() {
+        assertThat {
+            checkGradleVersion(GradleVersions.Version_6_2) { "version too low" }
+        }.isSuccess()
+    }
+
+    @Test
+    fun `should throw an exception if the version is too low`() {
+        assertThat {
+            checkGradleVersion(veryHighVersion) { "version too low" }
+        }.isFailure()
+            .isInstanceOf(IllegalStateException::class)
+            .hasMessage("version too low")
+    }
+
+    @Test
+    fun `checkGradleVersion with plugin ID should return normally if the version is ok`() {
+        assertThat {
+            checkGradleVersion(GradleVersions.Version_6_2, "test.plugin")
+        }.isSuccess()
+    }
+
+    @Test
+    fun `checkGradleVersion with plugin ID should throw an exception if the version is too low`() {
+        assertThat {
+            checkGradleVersion(veryHighVersion, "test.plugin")
+        }.isFailure()
+            .isInstanceOf(IllegalStateException::class)
+            .hasMessage("The plugin \"test.plugin\" requires at least Gradle 9999.99")
+    }
+
+    @Test
+    fun `withMinGradleVersion should execute the block if the version is ok`() {
+        val block = mockk<Runnable>(relaxed = true)
+
+        withMinGradleVersion(GradleVersions.Version_6_2, block::run)
+
+        verify(exactly = 1) { block.run() }
+    }
+
+    @Test
+    fun `withMinGradleVersion should not execute the block if the version is too low`() {
+        val block = mockk<Runnable>(relaxed = true)
+
+        withMinGradleVersion(veryHighVersion, block::run)
+
+        verify(exactly = 0) { block.run() }
+    }
+
+    @Test
+    fun `withMinGradleVersion with fallback should execute the block if the version is ok`() {
+        val block = mockk<Runnable>("block", relaxed = true)
+        val fallback = mockk<Runnable>("fallback", relaxed = true)
+
+        withMinGradleVersion(GradleVersions.Version_6_2, block::run, fallback::run)
+
+        verify(exactly = 1) { block.run() }
+        verify(exactly = 0) { fallback.run() }
+    }
+
+    @Test
+    fun `withMinGradleVersion with fallback should execute the fallback if the version is too low`() {
+        val block = mockk<Runnable>("block", relaxed = true)
+        val fallback = mockk<Runnable>("fallback", relaxed = true)
+
+        withMinGradleVersion(veryHighVersion, block::run, fallback::run)
+
+        verify(exactly = 0) { block.run() }
+        verify(exactly = 1) { fallback.run() }
+    }
 }
-
-
-class GradleVersionsTestOld : DescribeSpec({
-    val veryHighVersion = GradleVersion.version("9999.99")
-
-
-    describe("checkGradleVersion with message") {
-
-        it("should return normally if the version is ok") {
-            assertThat {
-                checkGradleVersion(GradleVersions.Version_6_2) { "version too low" }
-            }.isSuccess()
-        }
-
-        it("should throw an exception if the version is too low") {
-            assertThat {
-                checkGradleVersion(veryHighVersion) { "version too low" }
-            }.isFailure()
-                .isInstanceOf(IllegalStateException::class)
-                .hasMessage("version too low")
-        }
-    }
-
-
-    describe("checkGradleVersion with plugin ID") {
-
-        it("should return normally if the version is ok") {
-            assertThat {
-                checkGradleVersion(GradleVersions.Version_6_2, "test.plugin")
-            }.isSuccess()
-        }
-
-        it("should throw an exception if the version is too low") {
-            assertThat {
-                checkGradleVersion(veryHighVersion, "test.plugin")
-            }.isFailure()
-                .isInstanceOf(IllegalStateException::class)
-                .hasMessage("The plugin \"test.plugin\" requires at least Gradle 9999.99")
-        }
-    }
-
-
-    describe("withMinGradleVersion") {
-
-        it("should execute the block if the version is ok") {
-
-            val block = mockk<Runnable>(relaxed = true)
-
-            withMinGradleVersion(GradleVersions.Version_6_2, block::run)
-
-            verify(exactly = 1) { block.run() }
-        }
-
-
-        it("should not execute the block if the version is too low") {
-
-            val block = mockk<Runnable>(relaxed = true)
-
-            withMinGradleVersion(veryHighVersion, block::run)
-
-            verify(exactly = 0) { block.run() }
-        }
-    }
-
-
-    describe("withMinGradleVersion with fallback") {
-
-        it("should execute the block if the version is ok") {
-
-            val block = mockk<Runnable>("block", relaxed = true)
-            val fallback = mockk<Runnable>("fallback", relaxed = true)
-
-            withMinGradleVersion(GradleVersions.Version_6_2, block::run, fallback::run)
-
-            verify(exactly = 1) { block.run() }
-            verify(exactly = 0) { fallback.run() }
-        }
-
-        it("should execute the fallback if the version is too low") {
-
-            val block = mockk<Runnable>("block", relaxed = true)
-            val fallback = mockk<Runnable>("fallback", relaxed = true)
-
-            withMinGradleVersion(veryHighVersion, block::run, fallback::run)
-
-            verify(exactly = 0) { block.run() }
-            verify(exactly = 1) { fallback.run() }
-        }
-    }
-})
