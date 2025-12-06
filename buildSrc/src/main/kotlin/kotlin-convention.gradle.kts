@@ -6,6 +6,7 @@ plugins {
     kotlin("jvm")
     id("dependencies-lock")
     id("dependencies-publishing")
+    id("org.jetbrains.kotlinx.kover")
 }
 
 repositories {
