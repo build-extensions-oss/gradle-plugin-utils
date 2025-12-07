@@ -1,4 +1,4 @@
-[![Codecov](https://codecov.io/gh/detekt/detekt/branch/main/graph/badge.svg)](https://codecov.io/gh/detekt/detekt)
+[![codecov](https://codecov.io/github/build-extensions-oss/gradle-plugin-utils/graph/badge.svg?token=CB866ZJ7AP)](https://codecov.io/github/build-extensions-oss/gradle-plugin-utils)
 
 Artefacts:
 * gradle-plugin-utils: ![gradle-plugin-utils - Maven Central Version](https://img.shields.io/maven-central/v/io.github.build-extensions-oss/gradle-plugin-utils)
