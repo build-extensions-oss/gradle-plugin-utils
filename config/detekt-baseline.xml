@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <CurrentIssues>
+    <ID>CyclomaticComplexMethod:DurationUtils.kt$fun Duration.toSimpleString(): String</ID>
+    <ID>DestructuringDeclarationWithTooManyEntries:RuleNamePattern.kt$RuleNamePattern2.Companion$val (prefix, placeholder1, middlePart, placeholder2, suffix) = result.destructured</ID>
+    <ID>MagicNumber:DurationUtils.kt$1000</ID>
+    <ID>MagicNumber:DurationUtils.kt$24</ID>
+    <ID>MagicNumber:DurationUtils.kt$60</ID>
+    <ID>MagicNumber:StringCaseUtils.kt$5</ID>
+    <ID>MaxLineLength:ProjectPropertiesTest.kt$ProjectPropertiesTest$*</ID>
+    <ID>NestedBlockDepth:RuleNamePattern.kt$RuleNamePattern2$fun &lt;S1 : Named, S2 : Named&gt; findSources( targetName: String, sourceContainer1: NamedDomainObjectCollection&lt;S1&gt;, sourceContainer2: NamedDomainObjectCollection&lt;S2&gt; ): Pair&lt;S1, S2&gt;?</ID>
+    <ID>NestedBlockDepth:RuleNamePattern.kt$RuleNamePattern2$fun &lt;S1 : Named, S2 : Named&gt; findSources( targetName: String, sourceContainer1: NamedDomainObjectCollection&lt;S1&gt;, sourceContainer2Function: (S1) -&gt; NamedDomainObjectCollection&lt;S2&gt; ): Pair&lt;S1, S2&gt;?</ID>
+    <ID>NewLineAtEndOfFile:GradleVersionsTest.kt$build.extensions.oss.gradle.pluginutils.GradleVersionsTest.kt</ID>
+    <ID>ReturnCount:DurationUtils.kt$fun Duration.toSimpleString(): String</ID>
+    <ID>TooManyFunctions:DelegateReader.kt$DelegateReader : FilterReader</ID>
+    <ID>UseCheckOrError:SystemUtils.kt$SystemUtils$throw IllegalStateException("Cannot determine operating system name and version")</ID>
+    <ID>WildcardImport:SimpleTemplateEngineFilterReader.kt$import java.io.*</ID>
+    <ID>MatchingDeclarationName:TaskExtensions.kt$TaskOutcome</ID>
+    <ID>ReturnCount:TaskExtensions.kt$fun Task.execute( checkUpToDate: Boolean = true, checkOnlyIf: Boolean = true, rethrowExceptions: Boolean = true ): TaskOutcome</ID>
+  </CurrentIssues>
+</SmellBaseline>
