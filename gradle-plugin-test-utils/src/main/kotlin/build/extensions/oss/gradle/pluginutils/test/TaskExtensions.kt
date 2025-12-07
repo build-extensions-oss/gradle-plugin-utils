@@ -12,10 +12,7 @@ import org.gradle.workers.WorkerExecutor
 
 
 enum class TaskOutcome {
-    SUCCESS,
-    FAILED,
-    UP_TO_DATE,
-    SKIPPED,
+    SUCCESS, FAILED, UP_TO_DATE, SKIPPED,
 }
 
 /**
@@ -23,7 +20,8 @@ enum class TaskOutcome {
  * the operation explicitly. So,
  */
 private class RunnableBuildOperationWrapper(private val functionToRun: () -> TaskOutcome) : RunnableBuildOperation {
-    // we assume that the result will be produced only once. The class doesn't disallow setting it externally - just don't do that
+    // We assume that the result will be produced only once.
+    // The class doesn't disallow setting it externally - just don't do that
     var result: TaskOutcome? = null
 
     /**
@@ -59,13 +57,14 @@ private class RunnableBuildOperationWrapper(private val functionToRun: () -> Tas
  * @receiver the [Task] to execute
  * @param checkUpToDate if `true`, run up-to-date checks first
  * @param checkOnlyIf if `true`, run only-if checks first (includes checking the [enabled][Task.getEnabled] property)
- * @param rethrowExceptions if `true`, re-throw any exceptions that occur in the task. If `false`, return an
- *        outcome of [TaskOutcome.FAILED] if the task throws an exception
  * @return a [TaskOutcome] indicating the outcome of the task
  */
-@Deprecated(message = "This function uses internal Gradle API to run tasks, which can be changed between versions. Instead, Gradle functional tests should be used.")
+@Deprecated(
+    message = "This function uses internal Gradle API to run tasks, which can be changed between versions. " +
+            "Instead, Gradle functional tests should be used."
+)
 fun Task.execute(
-    checkUpToDate: Boolean = true, checkOnlyIf: Boolean = true, rethrowExceptions: Boolean = true
+    checkUpToDate: Boolean = true, checkOnlyIf: Boolean = true
 ): TaskOutcome {
     this as TaskInternal
 
@@ -91,7 +90,8 @@ fun Task.execute(
             }
         }
 
-        // execute all actions scheduled. Please note - this isn't fully correct code, because we don't process exceptions properly
+        // execute all actions scheduled.
+        // Please note - this isn't fully correct code, because we don't process exceptions properly
         actions.forEach {
             it.execute(this)
         }
@@ -108,6 +108,39 @@ fun Task.execute(
 
     // the result was set implicitly (bad approach, very bad), however it is good enough for tests
     return newOperation.result!!
+}
+
+/**
+ * Executes a task.
+ *
+ * This works in a very limited way (e.g. it does not consider task dependencies), but it should be enough to have
+ * Gradle run the task's actions in a somewhat realistic way.
+ *
+ * The [checkUpToDate] parameter can be used to control whether to run up-to-date checks, as defined by custom
+ * [TaskOutputs.upToDateWhen] blocks. If the up-to-date checks are evaluated and the task should be considered
+ * up-to-date, this function will set the [didWork][Task.getDidWork] flag on the task so it can be verified by a test.
+ *
+ * @receiver the [Task] to execute
+ * @param checkUpToDate if `true`, run up-to-date checks first
+ * @param checkOnlyIf if `true`, run only-if checks first (includes checking the [enabled][Task.getEnabled] property)
+ * @param rethrowExceptions if `true`, re-throw any exceptions that occur in the task. If `false`, return an
+ *        outcome of [TaskOutcome.FAILED] if the task throws an exception
+ * @return a [TaskOutcome] indicating the outcome of the task
+ */
+@Deprecated(
+    message = "This function uses internal Gradle API to run tasks, which can be changed between versions. " +
+            "Instead, Gradle functional tests should be used.",
+    replaceWith = ReplaceWith("execute(checkUpToDate, checkOnlyIf)"),
+    // the last parameter had been removed. So, no need to keep the method in compiled code
+    level = DeprecationLevel.ERROR
+)
+fun Task.execute(
+    checkUpToDate: Boolean = true, checkOnlyIf: Boolean = true, rethrowExceptions: Boolean = false
+): TaskOutcome {
+    check(!rethrowExceptions) {
+        "We must not throw exceptions"
+    }
+    @Suppress("DEPRECATION") return execute(checkUpToDate, checkOnlyIf)
 }
 
 

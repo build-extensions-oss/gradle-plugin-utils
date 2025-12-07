@@ -25,7 +25,9 @@ public final class build/extensions/oss/gradle/pluginutils/test/ProjectExtension
 }
 
 public final class build/extensions/oss/gradle/pluginutils/test/TaskExtensionsKt {
+	public static final fun execute (Lorg/gradle/api/Task;ZZ)Lbuild/extensions/oss/gradle/pluginutils/test/TaskOutcome;
 	public static final fun execute (Lorg/gradle/api/Task;ZZZ)Lbuild/extensions/oss/gradle/pluginutils/test/TaskOutcome;
+	public static synthetic fun execute$default (Lorg/gradle/api/Task;ZZILjava/lang/Object;)Lbuild/extensions/oss/gradle/pluginutils/test/TaskOutcome;
 	public static synthetic fun execute$default (Lorg/gradle/api/Task;ZZZILjava/lang/Object;)Lbuild/extensions/oss/gradle/pluginutils/test/TaskOutcome;
 	public static final fun isSkipped (Lorg/gradle/api/Task;)Z
 }
