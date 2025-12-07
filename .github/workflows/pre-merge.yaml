@@ -61,7 +61,7 @@ jobs:
       - name: Generate kover coverage report
         run: ./gradlew koverXmlReport
 
-      # see https://app.codecov.io/
+      # see https://app.codecov.io/github/build-extensions-oss
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v5
         with:
