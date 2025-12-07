@@ -9,6 +9,7 @@ plugins {
     id("dependencies-lock")
     id("dependencies-publishing")
     id("org.jetbrains.kotlinx.kover")
+    id("io.gitlab.arturbosch.detekt")
 }
 
 repositories {
@@ -60,4 +61,13 @@ tasks.withType<Test> {
         // create the folder if needed
         localTempFolder.mkdirs()
     }
+}
+
+val rootProjectBuildTask = rootProject.tasks.getByName("build")
+
+tasks {
+    // prohibit build without verification
+    rootProjectBuildTask.dependsOn(getByName("koverCachedVerify"))
+    // prohibit build without running detekt
+    rootProjectBuildTask.dependsOn(getByName("detekt"))
 }
