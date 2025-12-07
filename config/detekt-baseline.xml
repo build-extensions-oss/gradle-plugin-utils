@@ -17,5 +17,7 @@
     <ID>WildcardImport:SimpleTemplateEngineFilterReader.kt$import java.io.*</ID>
     <ID>MatchingDeclarationName:TaskExtensions.kt$TaskOutcome</ID>
     <ID>ReturnCount:TaskExtensions.kt$fun Task.execute( checkUpToDate: Boolean = true, checkOnlyIf: Boolean = true, rethrowExceptions: Boolean = true ): TaskOutcome</ID>
+      <ID>MaxLineLength:ProjectPropertiesTest.kt$ProjectPropertiesTest$*</ID>
+      <ID>NewLineAtEndOfFile:GradleVersionsTest.kt$build.extensions.oss.gradle.pluginutils.GradleVersionsTest.kt</ID>
   </CurrentIssues>
 </SmellBaseline>
