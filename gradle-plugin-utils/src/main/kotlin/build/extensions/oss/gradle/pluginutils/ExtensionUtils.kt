@@ -1,10 +1,17 @@
-@file:Suppress("DeprecatedCallableAddReplaceWith", "DEPRECATION")
-
 package build.extensions.oss.gradle.pluginutils
 
 import org.gradle.api.plugins.Convention
 import org.gradle.api.plugins.ExtensionAware
 
+
+@Deprecated(
+    message = "Deprecated - disallow late runtime cast",
+    replaceWith = ReplaceWith("extension(name, T::class.java)")
+)
+fun <T : Any> Any.extension(name: String): T? {
+    @Suppress("UNCHECKED_CAST")
+    return extension(name, Any::class.java) as T?
+}
 
 /**
  * Gets the extension of the given name if it exists.
@@ -15,10 +22,21 @@ import org.gradle.api.plugins.ExtensionAware
  * @param name the extension name
  * @return the extension, or `null` if it does not exist
  */
-@Suppress("UNCHECKED_CAST")
-fun <T : Any> Any.extension(name: String): T? =
-    (this as? ExtensionAware)?.extensions?.findByName(name) as T?
+fun <T : Any> Any.extension(name: String, clazz: Class<T>): T? {
+    val resultCandidate = (this as? ExtensionAware)?.extensions?.findByName(name)
 
+    return clazz.cast(resultCandidate)
+}
+
+
+@Deprecated(
+    message = "Deprecated - disallow late runtime cast",
+    replaceWith = ReplaceWith("requiredExtension(name, T::class.java)")
+)
+fun <T : Any> Any.requiredExtension(name: String): T {
+    @Suppress("UNCHECKED_CAST")
+    return requiredExtension(name, Any::class.java) as T
+}
 
 /**
  * Gets the extension of the given name, throwing an exception if it does not exist.
@@ -29,9 +47,11 @@ fun <T : Any> Any.extension(name: String): T? =
  * @throws ClassCastException if the receiver object is not [ExtensionAware]
  * @throws org.gradle.api.UnknownDomainObjectException if the extension does not exist
  */
-@Suppress("UNCHECKED_CAST")
-fun <T : Any> Any.requiredExtension(name: String): T =
-    (this as ExtensionAware).extensions.getByName(name) as T
+fun <T : Any> Any.requiredExtension(name: String, clazz: Class<T>): T {
+    val returnCandidate = (this as ExtensionAware).extensions.getByName(name)
+
+    return clazz.cast(returnCandidate)
+}
 
 
 /**
@@ -58,20 +78,6 @@ inline fun <reified T : Any> Any.extension(): T? =
  */
 inline fun <reified T : Any> Any.requiredExtension(): T =
     (this as ExtensionAware).extensions.getByType(typeOf<T>())
-
-
-/**
- * Gets the convention plugin object of the given type if it exists.
- *
- * Will return `null` if the receiver is not an object that supports conventions.
- *
- * @receiver the object containing conventions
- * @param <T> the convention plugin type
- * @return the convention plugin object, or `null` if it does not exist
- */
-@Deprecated("prefer extension objects over conventions")
-inline fun <reified T : Any> Any.conventionPlugin(): T? =
-    ((this as? ExtensionAware)?.extensions as? Convention)?.findPlugin(T::class.java)
 
 
 /**
