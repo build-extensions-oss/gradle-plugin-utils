@@ -61,18 +61,10 @@ jobs:
       - name: Generate kover coverage report
         run: ./gradlew koverXmlReport
 
-      # see https://github.com/marketplace/actions/kotlinx-kover-report
-      - name: Add coverage report to PR
-        id: kover
-        uses: mi-kas/kover-report@v1
+      # see https://app.codecov.io/github/build-extensions-oss
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v5
         with:
-          # we aggregate everything in root project
-          path: ${{ github.workspace }}/build/reports/kover/report.xml
-          title: Code Coverage
-          update-comment: true
-          # We check that in root project - no need to repeat it once again
-          # min-coverage-overall: ???
-          # we can't validate this in Gradle - the report must do this on GitHub
-          # We aren't ready yet
-          min-coverage-changed-files: 90
-          coverage-counter-type: LINE
+          files: ./build/reports/kover/report.xml
+          verbose: true
+          token: ${{ secrets.CODECOV_TOKEN }}
