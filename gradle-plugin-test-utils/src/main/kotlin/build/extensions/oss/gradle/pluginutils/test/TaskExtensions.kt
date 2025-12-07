@@ -1,12 +1,13 @@
 package build.extensions.oss.gradle.pluginutils.test
 
-import org.gradle.BuildResult
 import org.gradle.api.Task
 import org.gradle.api.internal.TaskInternal
 import org.gradle.api.internal.project.ProjectInternal
 import org.gradle.api.tasks.TaskOutputs
+import org.gradle.internal.operations.BuildOperationContext
 import org.gradle.internal.operations.BuildOperationDescriptor
 import org.gradle.internal.operations.BuildOperationExecutor
+import org.gradle.internal.operations.RunnableBuildOperation
 import org.gradle.workers.WorkerExecutor
 
 
@@ -17,6 +18,33 @@ enum class TaskOutcome {
     SKIPPED,
 }
 
+/**
+ * The class is needed for this file only. Due to internal changes in Gradle with tasks invocations, we must construct
+ * the operation explicitly. So,
+ */
+private class RunnableBuildOperationWrapper(private val functionToRun: () -> TaskOutcome) : RunnableBuildOperation {
+    // we assume that the result will be produced only once. The class doesn't disallow setting it externally - just don't do that
+    var result: TaskOutcome? = null
+
+    /**
+     * Invokes the Gradle action. We also have to remember tasks output, so we use try...catch as well
+     */
+    override fun run(buildOperationContext: BuildOperationContext) {
+        try {
+            result = functionToRun()
+        } catch (ex: Exception) {
+            result = TaskOutcome.FAILED
+
+            throw ex
+        }
+
+        buildOperationContext.setResult(result)
+    }
+
+    override fun description(): BuildOperationDescriptor.Builder {
+        return BuildOperationDescriptor.displayName("ignored")
+    }
+}
 
 /**
  * Executes a task.
@@ -35,52 +63,51 @@ enum class TaskOutcome {
  *        outcome of [TaskOutcome.FAILED] if the task throws an exception
  * @return a [TaskOutcome] indicating the outcome of the task
  */
+@Deprecated(message = "This function uses internal Gradle API to run tasks, which can be changed between versions. Instead, Gradle functional tests should be used.")
 fun Task.execute(
     checkUpToDate: Boolean = true, checkOnlyIf: Boolean = true, rethrowExceptions: Boolean = true
 ): TaskOutcome {
-
     this as TaskInternal
 
+    // resolve internal Gradle service registry (aka internal service locator)
     val services = (project as ProjectInternal).services
 
-    val buildOperationExecutor = services[BuildOperationExecutor::class.java]
+    val buildOperationExecutor: BuildOperationExecutor = services[BuildOperationExecutor::class.java]
     val workerExecutor = services[WorkerExecutor::class.java]
 
-    val buildOperation = buildOperationExecutor.start(BuildOperationDescriptor.displayName(name))
-    var buildOperationResult = BuildResult(project.gradle, null)
-
-    try {
+    // construct new operation. This isn't a correct code, it just hacks up what is done inside Gradle
+    val newOperation = RunnableBuildOperationWrapper {
         if (checkOnlyIf && !onlyIf.isSatisfiedBy(this)) {
-            return TaskOutcome.SKIPPED
+            return@RunnableBuildOperationWrapper TaskOutcome.SKIPPED
         }
 
+        // workaround up-to-date task
         if (checkUpToDate) {
             val upToDateSpec = outputs.upToDateSpec
             val upToDate = !upToDateSpec.isEmpty && upToDateSpec.isSatisfiedBy(this)
             if (upToDate) {
                 didWork = false
-                return TaskOutcome.UP_TO_DATE
+                return@RunnableBuildOperationWrapper TaskOutcome.UP_TO_DATE
             }
         }
 
+        // execute all actions scheduled. Please note - this isn't fully correct code, because we don't process exceptions properly
         actions.forEach {
             it.execute(this)
         }
 
         workerExecutor.await()
-        return if (didWork) TaskOutcome.SUCCESS else TaskOutcome.UP_TO_DATE
-
-    } catch (ex: Exception) {
-        buildOperationResult = BuildResult(project.gradle, ex)
-        if (rethrowExceptions) {
-            throw ex
-        } else {
-            buildOperation.failed(ex)
-            return TaskOutcome.FAILED
-        }
-    } finally {
-        buildOperation.setResult(buildOperationResult)
+        // return results
+        return@RunnableBuildOperationWrapper if (didWork) TaskOutcome.SUCCESS else TaskOutcome.UP_TO_DATE
     }
+
+    // run all operations via that queue
+    buildOperationExecutor.runAll { buildOperationQueue ->
+        buildOperationQueue.add(newOperation)
+    }
+
+    // the result was set implicitly (bad approach, very bad), however it is good enough for tests
+    return newOperation.result!!
 }
 
 
