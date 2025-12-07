@@ -1,0 +1,238 @@
+public final class build/extensions/oss/gradle/pluginutils/ActionExtensionsKt {
+	public static final fun andThen (Lorg/gradle/api/Action;Lorg/gradle/api/Action;)Lorg/gradle/api/Action;
+	public static final fun combine (Ljava/util/Collection;)Lorg/gradle/api/Action;
+}
+
+public final class build/extensions/oss/gradle/pluginutils/DurationUtilsKt {
+	public static final fun toSimpleString (Ljava/time/Duration;)Ljava/lang/String;
+}
+
+public final class build/extensions/oss/gradle/pluginutils/ExtensionUtilsKt {
+	public static final fun extension (Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+	public static final fun requiredExtension (Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+}
+
+public abstract interface class build/extensions/oss/gradle/pluginutils/GenericPropertyDelegate {
+	public abstract fun provideDelegate (Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+}
+
+public abstract interface class build/extensions/oss/gradle/pluginutils/GenericReadOnlyPropertyDelegate : build/extensions/oss/gradle/pluginutils/GenericPropertyDelegate {
+}
+
+public final class build/extensions/oss/gradle/pluginutils/GradleVersions {
+	public static final field INSTANCE Lbuild/extensions/oss/gradle/pluginutils/GradleVersions;
+	public final fun getVersion_4_0 ()Lorg/gradle/util/GradleVersion;
+	public final fun getVersion_4_1 ()Lorg/gradle/util/GradleVersion;
+	public final fun getVersion_4_10 ()Lorg/gradle/util/GradleVersion;
+	public final fun getVersion_4_2 ()Lorg/gradle/util/GradleVersion;
+	public final fun getVersion_4_3 ()Lorg/gradle/util/GradleVersion;
+	public final fun getVersion_4_4 ()Lorg/gradle/util/GradleVersion;
+	public final fun getVersion_4_5 ()Lorg/gradle/util/GradleVersion;
+	public final fun getVersion_4_6 ()Lorg/gradle/util/GradleVersion;
+	public final fun getVersion_4_7 ()Lorg/gradle/util/GradleVersion;
+	public final fun getVersion_4_8 ()Lorg/gradle/util/GradleVersion;
+	public final fun getVersion_4_9 ()Lorg/gradle/util/GradleVersion;
+	public final fun getVersion_5_0 ()Lorg/gradle/util/GradleVersion;
+	public final fun getVersion_5_1 ()Lorg/gradle/util/GradleVersion;
+	public final fun getVersion_5_2 ()Lorg/gradle/util/GradleVersion;
+	public final fun getVersion_5_3 ()Lorg/gradle/util/GradleVersion;
+	public final fun getVersion_5_4 ()Lorg/gradle/util/GradleVersion;
+	public final fun getVersion_5_5 ()Lorg/gradle/util/GradleVersion;
+	public final fun getVersion_5_6 ()Lorg/gradle/util/GradleVersion;
+	public final fun getVersion_6_0 ()Lorg/gradle/util/GradleVersion;
+	public final fun getVersion_6_1 ()Lorg/gradle/util/GradleVersion;
+	public final fun getVersion_6_2 ()Lorg/gradle/util/GradleVersion;
+	public final fun getVersion_6_3 ()Lorg/gradle/util/GradleVersion;
+	public final fun getVersion_6_4 ()Lorg/gradle/util/GradleVersion;
+	public final fun getVersion_6_5 ()Lorg/gradle/util/GradleVersion;
+	public final fun getVersion_6_6 ()Lorg/gradle/util/GradleVersion;
+	public final fun getVersion_6_7 ()Lorg/gradle/util/GradleVersion;
+	public final fun getVersion_6_8 ()Lorg/gradle/util/GradleVersion;
+	public final fun getVersion_6_9 ()Lorg/gradle/util/GradleVersion;
+	public final fun getVersion_7_0 ()Lorg/gradle/util/GradleVersion;
+	public final fun getVersion_7_1 ()Lorg/gradle/util/GradleVersion;
+	public final fun getVersion_7_2 ()Lorg/gradle/util/GradleVersion;
+	public final fun getVersion_7_3 ()Lorg/gradle/util/GradleVersion;
+	public final fun getVersion_7_4 ()Lorg/gradle/util/GradleVersion;
+	public final fun getVersion_7_5 ()Lorg/gradle/util/GradleVersion;
+	public final fun getVersion_7_6 ()Lorg/gradle/util/GradleVersion;
+	public final fun getVersion_8_1 ()Lorg/gradle/util/GradleVersion;
+	public final fun getVersion_8_2 ()Lorg/gradle/util/GradleVersion;
+	public final fun getVersion_8_3 ()Lorg/gradle/util/GradleVersion;
+}
+
+public final class build/extensions/oss/gradle/pluginutils/GradleVersionsKt {
+	public static final fun checkGradleVersion (Lorg/gradle/util/GradleVersion;Ljava/lang/String;)V
+	public static final fun checkGradleVersion (Lorg/gradle/util/GradleVersion;Lkotlin/jvm/functions/Function0;)V
+	public static final fun withMinGradleVersion (Lorg/gradle/util/GradleVersion;Lkotlin/jvm/functions/Function0;)V
+	public static final fun withMinGradleVersion (Lorg/gradle/util/GradleVersion;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;)Ljava/lang/Object;
+}
+
+public final class build/extensions/oss/gradle/pluginutils/ProjectExtensionsKt {
+	public static final fun getVersionProvider (Lorg/gradle/api/Project;)Lorg/gradle/api/provider/Provider;
+}
+
+public final class build/extensions/oss/gradle/pluginutils/ProjectPropertiesKt {
+	public static final fun booleanProviderFromProjectProperty (Lorg/gradle/api/Project;Ljava/lang/String;Ljava/lang/Boolean;)Lorg/gradle/api/provider/Provider;
+	public static synthetic fun booleanProviderFromProjectProperty$default (Lorg/gradle/api/Project;Ljava/lang/String;Ljava/lang/Boolean;ILjava/lang/Object;)Lorg/gradle/api/provider/Provider;
+	public static final fun dirProviderFromProjectProperty (Lorg/gradle/api/Project;Ljava/lang/String;Ljava/lang/String;Z)Lorg/gradle/api/provider/Provider;
+	public static synthetic fun dirProviderFromProjectProperty$default (Lorg/gradle/api/Project;Ljava/lang/String;Ljava/lang/String;ZILjava/lang/Object;)Lorg/gradle/api/provider/Provider;
+	public static final fun durationProviderFromProjectProperty (Lorg/gradle/api/Project;Ljava/lang/String;Ljava/time/Duration;)Lorg/gradle/api/provider/Provider;
+	public static synthetic fun durationProviderFromProjectProperty$default (Lorg/gradle/api/Project;Ljava/lang/String;Ljava/time/Duration;ILjava/lang/Object;)Lorg/gradle/api/provider/Provider;
+	public static final fun fileProviderFromProjectProperty (Lorg/gradle/api/Project;Ljava/lang/String;Ljava/lang/String;Z)Lorg/gradle/api/provider/Provider;
+	public static synthetic fun fileProviderFromProjectProperty$default (Lorg/gradle/api/Project;Ljava/lang/String;Ljava/lang/String;ZILjava/lang/Object;)Lorg/gradle/api/provider/Provider;
+	public static final fun intProviderFromProjectProperty (Lorg/gradle/api/Project;Ljava/lang/String;Ljava/lang/Integer;)Lorg/gradle/api/provider/Provider;
+	public static synthetic fun intProviderFromProjectProperty$default (Lorg/gradle/api/Project;Ljava/lang/String;Ljava/lang/Integer;ILjava/lang/Object;)Lorg/gradle/api/provider/Provider;
+	public static final fun providerFromProjectProperty (Lorg/gradle/api/Project;Ljava/lang/String;Ljava/lang/String;Z)Lorg/gradle/api/provider/Provider;
+	public static synthetic fun providerFromProjectProperty$default (Lorg/gradle/api/Project;Ljava/lang/String;Ljava/lang/String;ZILjava/lang/Object;)Lorg/gradle/api/provider/Provider;
+}
+
+public abstract interface class build/extensions/oss/gradle/pluginutils/PropertyDelegate {
+	public abstract fun provideDelegate (Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+}
+
+public final class build/extensions/oss/gradle/pluginutils/ProviderExtensionsKt {
+	public static final fun asFile (Lorg/gradle/api/provider/Provider;)Lorg/gradle/api/provider/Provider;
+	public static final fun asGString (Lorg/gradle/api/provider/Provider;Ljava/lang/Object;)Lorg/gradle/api/provider/Provider;
+	public static final fun ifPresent (Lorg/gradle/api/provider/Provider;Lkotlin/jvm/functions/Function1;)V
+	public static final fun toUri (Lorg/gradle/api/provider/Provider;)Lorg/gradle/api/provider/Provider;
+	public static final fun withDefault (Lorg/gradle/api/provider/Provider;Ljava/lang/Object;Lorg/gradle/api/provider/ProviderFactory;)Lorg/gradle/api/provider/Provider;
+	public static final fun withDefault (Lorg/gradle/api/provider/Provider;Lorg/gradle/api/provider/Provider;Lorg/gradle/api/provider/ProviderFactory;)Lorg/gradle/api/provider/Provider;
+}
+
+public abstract interface class build/extensions/oss/gradle/pluginutils/ReadOnlyPropertyDelegate : build/extensions/oss/gradle/pluginutils/PropertyDelegate {
+}
+
+public final class build/extensions/oss/gradle/pluginutils/SimpleDurationParser {
+	public static final field INSTANCE Lbuild/extensions/oss/gradle/pluginutils/SimpleDurationParser;
+	public final fun parseAutoDetect (Ljava/lang/String;)Ljava/time/Duration;
+	public final fun parseSimple (Ljava/lang/String;)Ljava/time/Duration;
+	public final fun tryParseAutoDetect (Ljava/lang/String;)Ljava/time/Duration;
+	public final fun tryParseSimple (Ljava/lang/String;)Ljava/time/Duration;
+}
+
+public final class build/extensions/oss/gradle/pluginutils/StringCaseUtilsKt {
+	public static final fun capitalize (Ljava/lang/String;)Ljava/lang/String;
+	public static final fun capitalizeWords (Ljava/lang/String;Z)Ljava/lang/String;
+	public static synthetic fun capitalizeWords$default (Ljava/lang/String;ZILjava/lang/Object;)Ljava/lang/String;
+	public static final fun decapitalize (Ljava/lang/String;)Ljava/lang/String;
+	public static final fun splitIntoWords (Ljava/lang/String;)Lkotlin/sequences/Sequence;
+}
+
+public final class build/extensions/oss/gradle/pluginutils/SystemUtils {
+	public static final field INSTANCE Lbuild/extensions/oss/gradle/pluginutils/SystemUtils;
+	public final fun getOperatingSystemArchiveFormat ()Ljava/lang/String;
+	public final fun getOperatingSystemClassifier ()Ljava/lang/String;
+}
+
+public abstract class build/extensions/oss/gradle/pluginutils/io/DelegateReader : java/io/FilterReader {
+	public fun <init> (Ljava/io/Reader;)V
+	public fun close ()V
+	protected abstract fun createDelegateReader (Ljava/io/Reader;)Ljava/io/Reader;
+	public fun mark (I)V
+	public fun markSupported ()Z
+	public fun read ()I
+	public fun read (Ljava/nio/CharBuffer;)I
+	public fun read ([C)I
+	public fun read ([CII)I
+	public fun ready ()Z
+	public fun reset ()V
+	public fun skip (J)J
+}
+
+public final class build/extensions/oss/gradle/pluginutils/io/SimpleTemplateEngineFilterReaderKt {
+	public static final fun expand (Lorg/gradle/api/file/ContentFilterable;Ljava/util/Map;Z)Lorg/gradle/api/file/ContentFilterable;
+}
+
+public abstract class build/extensions/oss/gradle/pluginutils/rules/AbstractPatternRule : build/extensions/oss/gradle/pluginutils/rules/AbstractRule {
+	public fun <init> (Ljava/lang/Class;Lorg/gradle/api/PolymorphicDomainObjectContainer;Lorg/gradle/api/NamedDomainObjectCollection;Lbuild/extensions/oss/gradle/pluginutils/rules/RuleNamePattern;)V
+	public fun <init> (Lkotlin/jvm/functions/Function2;Lorg/gradle/api/NamedDomainObjectCollection;Lbuild/extensions/oss/gradle/pluginutils/rules/RuleNamePattern;)V
+	public fun <init> (Lorg/gradle/api/NamedDomainObjectContainer;Lorg/gradle/api/NamedDomainObjectCollection;Lbuild/extensions/oss/gradle/pluginutils/rules/RuleNamePattern;)V
+	public final fun apply (Ljava/lang/String;)V
+	protected abstract fun configureFrom (Ljava/lang/Object;Lorg/gradle/api/Named;)V
+	public fun getDescription ()Ljava/lang/String;
+	protected final fun getNamePattern ()Lbuild/extensions/oss/gradle/pluginutils/rules/RuleNamePattern;
+	protected final fun getSourceContainer ()Lorg/gradle/api/NamedDomainObjectCollection;
+}
+
+public abstract class build/extensions/oss/gradle/pluginutils/rules/AbstractPatternRule2 : build/extensions/oss/gradle/pluginutils/rules/AbstractRule {
+	public fun <init> (Ljava/lang/Class;Lorg/gradle/api/PolymorphicDomainObjectContainer;Lorg/gradle/api/NamedDomainObjectCollection;Lorg/gradle/api/NamedDomainObjectCollection;Lbuild/extensions/oss/gradle/pluginutils/rules/RuleNamePattern2;)V
+	public fun <init> (Lkotlin/jvm/functions/Function2;Lorg/gradle/api/NamedDomainObjectCollection;Lorg/gradle/api/NamedDomainObjectCollection;Lbuild/extensions/oss/gradle/pluginutils/rules/RuleNamePattern2;)V
+	public fun <init> (Lorg/gradle/api/NamedDomainObjectContainer;Lorg/gradle/api/NamedDomainObjectCollection;Lorg/gradle/api/NamedDomainObjectCollection;Lbuild/extensions/oss/gradle/pluginutils/rules/RuleNamePattern2;)V
+	public final fun apply (Ljava/lang/String;)V
+	protected abstract fun configureFrom (Ljava/lang/Object;Lorg/gradle/api/Named;Lorg/gradle/api/Named;)V
+	public fun getDescription ()Ljava/lang/String;
+	protected final fun getNamePattern ()Lbuild/extensions/oss/gradle/pluginutils/rules/RuleNamePattern2;
+	protected final fun getSourceContainer1 ()Lorg/gradle/api/NamedDomainObjectCollection;
+	protected final fun getSourceContainer2 ()Lorg/gradle/api/NamedDomainObjectCollection;
+}
+
+public final class build/extensions/oss/gradle/pluginutils/rules/AbstractPatternRule2Kt {
+	public static final fun addPatternRule (Lorg/gradle/api/NamedDomainObjectContainer;Lbuild/extensions/oss/gradle/pluginutils/rules/RuleNamePattern2;Lorg/gradle/api/NamedDomainObjectCollection;Lorg/gradle/api/NamedDomainObjectContainer;Lkotlin/jvm/functions/Function3;)V
+	public static final fun addPatternRule (Lorg/gradle/api/PolymorphicDomainObjectContainer;Lbuild/extensions/oss/gradle/pluginutils/rules/RuleNamePattern2;Lkotlin/reflect/KClass;Lorg/gradle/api/NamedDomainObjectCollection;Lorg/gradle/api/NamedDomainObjectCollection;Lkotlin/jvm/functions/Function3;)V
+}
+
+public final class build/extensions/oss/gradle/pluginutils/rules/AbstractPatternRuleKt {
+	public static final fun addPatternRule (Lorg/gradle/api/NamedDomainObjectContainer;Lbuild/extensions/oss/gradle/pluginutils/rules/RuleNamePattern;Lorg/gradle/api/NamedDomainObjectCollection;Lkotlin/jvm/functions/Function2;)V
+	public static final fun addPatternRule (Lorg/gradle/api/PolymorphicDomainObjectContainer;Lbuild/extensions/oss/gradle/pluginutils/rules/RuleNamePattern;Lkotlin/reflect/KClass;Lorg/gradle/api/NamedDomainObjectCollection;Lkotlin/jvm/functions/Function2;)V
+}
+
+public abstract class build/extensions/oss/gradle/pluginutils/rules/AbstractPatternRuleOuterInner : build/extensions/oss/gradle/pluginutils/rules/AbstractRule {
+	public fun <init> (Ljava/lang/Class;Lorg/gradle/api/PolymorphicDomainObjectContainer;Lorg/gradle/api/NamedDomainObjectCollection;Lkotlin/jvm/functions/Function1;Lbuild/extensions/oss/gradle/pluginutils/rules/RuleNamePattern2;)V
+	public fun <init> (Lkotlin/jvm/functions/Function2;Lorg/gradle/api/NamedDomainObjectCollection;Lkotlin/jvm/functions/Function1;Lbuild/extensions/oss/gradle/pluginutils/rules/RuleNamePattern2;)V
+	public fun <init> (Lorg/gradle/api/NamedDomainObjectContainer;Lorg/gradle/api/NamedDomainObjectCollection;Lkotlin/jvm/functions/Function1;Lbuild/extensions/oss/gradle/pluginutils/rules/RuleNamePattern2;)V
+	public final fun apply (Ljava/lang/String;)V
+	protected abstract fun configureFrom (Ljava/lang/Object;Lorg/gradle/api/Named;Lorg/gradle/api/Named;)V
+	public fun getDescription ()Ljava/lang/String;
+	protected final fun getNamePattern ()Lbuild/extensions/oss/gradle/pluginutils/rules/RuleNamePattern2;
+	protected final fun getOuterSourceContainer ()Lorg/gradle/api/NamedDomainObjectCollection;
+}
+
+public final class build/extensions/oss/gradle/pluginutils/rules/AbstractPatternRuleOuterInnerKt {
+	public static final fun addPatternRule (Lorg/gradle/api/NamedDomainObjectContainer;Lbuild/extensions/oss/gradle/pluginutils/rules/RuleNamePattern2;Lorg/gradle/api/NamedDomainObjectCollection;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function3;)V
+	public static final fun addPatternRule (Lorg/gradle/api/PolymorphicDomainObjectContainer;Lbuild/extensions/oss/gradle/pluginutils/rules/RuleNamePattern2;Lkotlin/reflect/KClass;Lorg/gradle/api/NamedDomainObjectCollection;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function3;)V
+}
+
+public abstract class build/extensions/oss/gradle/pluginutils/rules/AbstractRule : org/gradle/api/Rule {
+	public fun <init> ()V
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract class build/extensions/oss/gradle/pluginutils/rules/AbstractTaskRule : build/extensions/oss/gradle/pluginutils/rules/AbstractPatternRule {
+	public fun <init> (Ljava/lang/Class;Lorg/gradle/api/tasks/TaskContainer;Lorg/gradle/api/NamedDomainObjectCollection;Lbuild/extensions/oss/gradle/pluginutils/rules/RuleNamePattern;)V
+	protected final fun getTasks ()Lorg/gradle/api/tasks/TaskContainer;
+}
+
+public abstract class build/extensions/oss/gradle/pluginutils/rules/AbstractTaskRule2 : build/extensions/oss/gradle/pluginutils/rules/AbstractPatternRule2 {
+	public fun <init> (Ljava/lang/Class;Lorg/gradle/api/tasks/TaskContainer;Lorg/gradle/api/NamedDomainObjectCollection;Lorg/gradle/api/NamedDomainObjectCollection;Lbuild/extensions/oss/gradle/pluginutils/rules/RuleNamePattern2;)V
+	protected final fun getTasks ()Lorg/gradle/api/tasks/TaskContainer;
+}
+
+public final class build/extensions/oss/gradle/pluginutils/rules/RuleNamePattern {
+	public static final field Companion Lbuild/extensions/oss/gradle/pluginutils/rules/RuleNamePattern$Companion;
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+	public final fun findSource (Ljava/lang/String;Lorg/gradle/api/NamedDomainObjectCollection;)Lorg/gradle/api/Named;
+	public final fun mapName (Ljava/lang/String;)Ljava/lang/String;
+	public final fun matches (Ljava/lang/String;)Z
+	public final fun sourceName (Ljava/lang/String;)Ljava/lang/String;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class build/extensions/oss/gradle/pluginutils/rules/RuleNamePattern$Companion {
+	public final fun parse (Ljava/lang/String;)Lbuild/extensions/oss/gradle/pluginutils/rules/RuleNamePattern;
+}
+
+public final class build/extensions/oss/gradle/pluginutils/rules/RuleNamePattern2 {
+	public static final field Companion Lbuild/extensions/oss/gradle/pluginutils/rules/RuleNamePattern2$Companion;
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+	public final fun findSources (Ljava/lang/String;Lorg/gradle/api/NamedDomainObjectCollection;Lkotlin/jvm/functions/Function1;)Lkotlin/Pair;
+	public final fun findSources (Ljava/lang/String;Lorg/gradle/api/NamedDomainObjectCollection;Lorg/gradle/api/NamedDomainObjectCollection;)Lkotlin/Pair;
+	public final fun mapName (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+	public final fun matches (Ljava/lang/String;)Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class build/extensions/oss/gradle/pluginutils/rules/RuleNamePattern2$Companion {
+	public final fun parse (Ljava/lang/String;)Lbuild/extensions/oss/gradle/pluginutils/rules/RuleNamePattern2;
+}
+

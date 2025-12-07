@@ -32,6 +32,6 @@ com-vanniktech-maven-publish-gradle-plugin = { module = "com.vanniktech.maven.pu
 # See https://detekt.dev/docs/introduction/compatibility/
 io-gitlab-arturbosch-detekt-detekt-gradle-plugin = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version = "1.23.6" }
 
-
+org-jetbrains-kotlinx-binary-compatibility-validator-gradle-plugin = { module = "org.jetbrains.kotlinx.binary-compatibility-validator:org.jetbrains.kotlinx.binary-compatibility-validator.gradle.plugin", version = "0.16.1" }
 
 [plugins]

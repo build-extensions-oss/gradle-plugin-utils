@@ -10,6 +10,8 @@ plugins {
     id("dependencies-publishing")
     id("org.jetbrains.kotlinx.kover")
     id("io.gitlab.arturbosch.detekt")
+    // the goal - to fail if we remove an existing method.
+    id("org.jetbrains.kotlinx.binary-compatibility-validator")
 }
 
 repositories {
@@ -77,12 +79,15 @@ detekt {
     baseline = file("$rootDir/config/detekt-baseline.xml") // a way of suppressing issues before introducing detekt
 }
 
-val rootProjectBuildTask = rootProject.tasks.getByName("build")
-
-tasks {
-    // prohibit build without verification
-    rootProjectBuildTask.dependsOn(getByName("koverCachedVerify"))
-    // prohibit build without running detekt
-    rootProjectBuildTask.dependsOn(getByName("detektMain"))
-    rootProjectBuildTask.dependsOn(getByName("detektTest"))
+// if someone request build task - let's configure it additionally
+rootProject.tasks.named("build").configure {
+    tasks {
+        // prohibit build without verification
+        dependsOn(named("koverCachedVerify"))
+        // prohibit build without running detekt
+        dependsOn(named("detektMain"))
+        dependsOn(named("detektTest"))
+        // depend on API validator
+        dependsOn(named("apiCheck"))
+    }
 }

@@ -1,0 +1,131 @@
+public abstract interface class build/extensions/oss/gradle/pluginutils/test/DirectoryBuilder {
+	public abstract fun directory (Ljava/lang/String;Lkotlin/jvm/functions/Function1;)V
+	public abstract fun file (Ljava/lang/String;Ljava/lang/String;ZLjava/nio/charset/Charset;)V
+	public abstract fun getPath ()Ljava/nio/file/Path;
+}
+
+public final class build/extensions/oss/gradle/pluginutils/test/DirectoryBuilder$DefaultImpls {
+	public static synthetic fun directory$default (Lbuild/extensions/oss/gradle/pluginutils/test/DirectoryBuilder;Ljava/lang/String;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)V
+	public static synthetic fun file$default (Lbuild/extensions/oss/gradle/pluginutils/test/DirectoryBuilder;Ljava/lang/String;Ljava/lang/String;ZLjava/nio/charset/Charset;ILjava/lang/Object;)V
+}
+
+public abstract interface annotation class build/extensions/oss/gradle/pluginutils/test/DirectoryBuilderDsl : java/lang/annotation/Annotation {
+}
+
+public final class build/extensions/oss/gradle/pluginutils/test/DirectoryBuilderKt {
+	public static final fun copyResources (Lbuild/extensions/oss/gradle/pluginutils/test/DirectoryBuilder;Ljava/lang/String;Ljava/lang/ClassLoader;)V
+	public static synthetic fun copyResources$default (Lbuild/extensions/oss/gradle/pluginutils/test/DirectoryBuilder;Ljava/lang/String;Ljava/lang/ClassLoader;ILjava/lang/Object;)V
+	public static final fun directory (Ljava/io/File;Lkotlin/jvm/functions/Function1;)V
+	public static final fun directory (Ljava/lang/String;Lkotlin/jvm/functions/Function1;)V
+	public static final fun directory (Ljava/nio/file/Path;Lkotlin/jvm/functions/Function1;)V
+}
+
+public final class build/extensions/oss/gradle/pluginutils/test/ProjectExtensionsKt {
+	public static final fun evaluate (Lorg/gradle/api/Project;)V
+}
+
+public final class build/extensions/oss/gradle/pluginutils/test/TaskExtensionsKt {
+	public static final fun execute (Lorg/gradle/api/Task;ZZZ)Lbuild/extensions/oss/gradle/pluginutils/test/TaskOutcome;
+	public static synthetic fun execute$default (Lorg/gradle/api/Task;ZZZILjava/lang/Object;)Lbuild/extensions/oss/gradle/pluginutils/test/TaskOutcome;
+	public static final fun isSkipped (Lorg/gradle/api/Task;)Z
+}
+
+public final class build/extensions/oss/gradle/pluginutils/test/TaskOutcome : java/lang/Enum {
+	public static final field FAILED Lbuild/extensions/oss/gradle/pluginutils/test/TaskOutcome;
+	public static final field SKIPPED Lbuild/extensions/oss/gradle/pluginutils/test/TaskOutcome;
+	public static final field SUCCESS Lbuild/extensions/oss/gradle/pluginutils/test/TaskOutcome;
+	public static final field UP_TO_DATE Lbuild/extensions/oss/gradle/pluginutils/test/TaskOutcome;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lbuild/extensions/oss/gradle/pluginutils/test/TaskOutcome;
+	public static fun values ()[Lbuild/extensions/oss/gradle/pluginutils/test/TaskOutcome;
+}
+
+public final class build/extensions/oss/gradle/pluginutils/test/assertions/assertk/CastKt {
+	public static final fun cast (Lassertk/Assert;)Lassertk/Assert;
+}
+
+public final class build/extensions/oss/gradle/pluginutils/test/assertions/assertk/ContainerKt {
+	public static final fun containsItem (Lassertk/Assert;Ljava/lang/String;)Lassertk/Assert;
+	public static final fun doesNotContainItem (Lassertk/Assert;Ljava/lang/String;)V
+}
+
+public final class build/extensions/oss/gradle/pluginutils/test/assertions/assertk/ExtensionKt {
+	public static final fun hasExtensionNamed (Lassertk/Assert;Ljava/lang/String;)Lassertk/Assert;
+}
+
+public final class build/extensions/oss/gradle/pluginutils/test/assertions/assertk/FileKt {
+	public static final fun child (Lassertk/Assert;Ljava/lang/String;)Lassertk/Assert;
+	public static final fun childDir (Lassertk/Assert;Ljava/lang/String;)Lassertk/Assert;
+	public static final fun childFile (Lassertk/Assert;Ljava/lang/String;)Lassertk/Assert;
+}
+
+public final class build/extensions/oss/gradle/pluginutils/test/assertions/assertk/GradleProjectKt {
+	public static final fun containsTask (Lassertk/Assert;Ljava/lang/String;Lkotlin/reflect/KClass;)Lassertk/Assert;
+}
+
+public final class build/extensions/oss/gradle/pluginutils/test/assertions/assertk/GradleTaskKt {
+	public static final fun doesNotHaveTaskDependency (Lassertk/Assert;Ljava/lang/String;)V
+	public static final fun getTaskDependencies (Lassertk/Assert;)Lassertk/Assert;
+	public static final fun hasOnlyTaskDependency (Lassertk/Assert;Ljava/lang/String;)V
+	public static final fun hasTaskDependencies (Lassertk/Assert;[Ljava/lang/String;Z)V
+	public static synthetic fun hasTaskDependencies$default (Lassertk/Assert;[Ljava/lang/String;ZILjava/lang/Object;)V
+	public static final fun hasTaskDependency (Lassertk/Assert;Ljava/lang/String;)V
+	public static final fun isNotSkipped (Lassertk/Assert;)V
+	public static final fun isSkipped (Lassertk/Assert;)V
+}
+
+public final class build/extensions/oss/gradle/pluginutils/test/assertions/assertk/ProviderKt {
+	public static final fun contains (Lassertk/Assert;Ljava/lang/Object;Ljava/lang/Object;)V
+	public static final fun dirValue (Lassertk/Assert;)Lassertk/Assert;
+	public static final fun fileValue (Lassertk/Assert;)Lassertk/Assert;
+	public static final fun hasValueEqualTo (Lassertk/Assert;Ljava/lang/Object;)V
+	public static final fun isFalse (Lassertk/Assert;)V
+	public static final fun isPresent (Lassertk/Assert;)Lassertk/Assert;
+	public static final fun isPresentAndEmpty (Lassertk/Assert;)V
+	public static final fun isPresentAndEmptyMap (Lassertk/Assert;)V
+	public static final fun isTrue (Lassertk/Assert;)V
+}
+
+public final class build/extensions/oss/gradle/pluginutils/test/junit/GradleProjectExtension : org/junit/jupiter/api/extension/AfterEachCallback, org/junit/jupiter/api/extension/BeforeAllCallback, org/junit/jupiter/api/extension/BeforeEachCallback, org/junit/jupiter/api/extension/ParameterResolver {
+	public fun <init> ()V
+	public fun afterEach (Lorg/junit/jupiter/api/extension/ExtensionContext;)V
+	public fun beforeAll (Lorg/junit/jupiter/api/extension/ExtensionContext;)V
+	public fun beforeEach (Lorg/junit/jupiter/api/extension/ExtensionContext;)V
+	public fun resolveParameter (Lorg/junit/jupiter/api/extension/ParameterContext;Lorg/junit/jupiter/api/extension/ExtensionContext;)Ljava/lang/Object;
+	public fun supportsParameter (Lorg/junit/jupiter/api/extension/ParameterContext;Lorg/junit/jupiter/api/extension/ExtensionContext;)Z
+	public final fun useProjectName (Ljava/lang/String;)V
+	public final fun withProjectBuilder (Ljava/util/function/Consumer;)Lbuild/extensions/oss/gradle/pluginutils/test/junit/GradleProjectExtension;
+	public final fun withProjectBuilder (Lkotlin/jvm/functions/Function1;)Lbuild/extensions/oss/gradle/pluginutils/test/junit/GradleProjectExtension;
+}
+
+public abstract interface annotation class build/extensions/oss/gradle/pluginutils/test/junit/GradleProjectName : java/lang/annotation/Annotation {
+	public abstract fun value ()Ljava/lang/String;
+}
+
+public abstract interface annotation class build/extensions/oss/gradle/pluginutils/test/junit/GradleProjectTest : java/lang/annotation/Annotation {
+}
+
+public abstract interface annotation class build/extensions/oss/gradle/pluginutils/test/junit/SetupProjectBuilder : java/lang/annotation/Annotation {
+}
+
+public abstract interface class build/extensions/oss/gradle/pluginutils/test/spek/MemoizedGradleProject : org/spekframework/spek2/lifecycle/MemoizedValue {
+	public abstract fun applyPlugin (Lkotlin/reflect/KClass;)V
+	public abstract fun getProjectName ()Ljava/lang/String;
+	public abstract fun initializer (Lkotlin/jvm/functions/Function1;)V
+	public abstract fun setProjectName (Ljava/lang/String;)V
+}
+
+public final class build/extensions/oss/gradle/pluginutils/test/spek/MemoizedGradleProject$DefaultImpls {
+	public static fun applyPlugin (Lbuild/extensions/oss/gradle/pluginutils/test/spek/MemoizedGradleProject;Lkotlin/reflect/KClass;)V
+}
+
+public final class build/extensions/oss/gradle/pluginutils/test/spek/MemoizedGradleProjectKt {
+	public static final fun gradleProject (Lorg/spekframework/spek2/dsl/LifecycleAware;)Lbuild/extensions/oss/gradle/pluginutils/test/spek/MemoizedGradleProject;
+	public static final fun setupGradleProject (Lorg/spekframework/spek2/dsl/LifecycleAware;Lkotlin/jvm/functions/Function1;)Lorg/spekframework/spek2/lifecycle/MemoizedValue;
+}
+
+public final class build/extensions/oss/gradle/pluginutils/test/spek/MemoizedGradleTaskKt {
+	public static final fun gradleTask (Lorg/spekframework/spek2/dsl/LifecycleAware;Lkotlin/reflect/KClass;Ljava/lang/String;Lkotlin/jvm/functions/Function1;)Lorg/spekframework/spek2/lifecycle/MemoizedValue;
+	public static synthetic fun gradleTask$default (Lorg/spekframework/spek2/dsl/LifecycleAware;Lkotlin/reflect/KClass;Ljava/lang/String;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lorg/spekframework/spek2/lifecycle/MemoizedValue;
+}
+
