@@ -1,5 +1,3 @@
-@file:Suppress("DeprecatedCallableAddReplaceWith", "DEPRECATION")
-
 package build.extensions.oss.gradle.pluginutils
 
 import org.gradle.api.plugins.Convention
@@ -58,20 +56,6 @@ inline fun <reified T : Any> Any.extension(): T? =
  */
 inline fun <reified T : Any> Any.requiredExtension(): T =
     (this as ExtensionAware).extensions.getByType(typeOf<T>())
-
-
-/**
- * Gets the convention plugin object of the given type if it exists.
- *
- * Will return `null` if the receiver is not an object that supports conventions.
- *
- * @receiver the object containing conventions
- * @param <T> the convention plugin type
- * @return the convention plugin object, or `null` if it does not exist
- */
-@Deprecated("prefer extension objects over conventions")
-inline fun <reified T : Any> Any.conventionPlugin(): T? =
-    ((this as? ExtensionAware)?.extensions as? Convention)?.findPlugin(T::class.java)
 
 
 /**
