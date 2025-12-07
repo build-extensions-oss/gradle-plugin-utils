@@ -1,6 +1,11 @@
 # Gradle
 .gradle/
-build/
+
+build/**
+*/build/**
+
+!/kotlin/build/extensions
+!/kotlin/build/extensions/**/*
 
 # IntelliJ IDEA
 .idea/
