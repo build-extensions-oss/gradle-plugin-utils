@@ -1,7 +1,7 @@
 Artefacts:
-* ![gradle-plugin-utils - Maven Central Version](https://img.shields.io/maven-central/v/io.github.build-extensions-oss/gradle-plugin-utils)
-* ![gradle-plugin-test-utils - Maven Central Version](https://img.shields.io/maven-central/v/io.github.build-extensions-oss/gradle-plugin-test-utils)
-* ![gradle-plugin-integration-test-utils - Maven Central Version](https://img.shields.io/maven-central/v/io.github.build-extensions-oss/gradle-plugin-integration-test-utils)
+* gradle-plugin-utils: ![gradle-plugin-utils - Maven Central Version](https://img.shields.io/maven-central/v/io.github.build-extensions-oss/gradle-plugin-utils)
+* gradle-plugin-test-utils: ![gradle-plugin-test-utils - Maven Central Version](https://img.shields.io/maven-central/v/io.github.build-extensions-oss/gradle-plugin-test-utils)
+* gradle-plugin-integration-test-utils: ![gradle-plugin-integration-test-utils - Maven Central Version](https://img.shields.io/maven-central/v/io.github.build-extensions-oss/gradle-plugin-integration-test-utils)
 
 This is the fork of [unbroken-dome/gradle-plugin-utils](https://github.com/unbroken-dome/gradle-plugin-utils) to support
 newer Gradle.
