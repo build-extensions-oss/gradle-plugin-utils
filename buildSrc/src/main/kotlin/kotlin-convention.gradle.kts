@@ -70,11 +70,19 @@ tasks.withType<Test> {
     }
 }
 
+detekt {
+    buildUponDefaultConfig = true // preconfigure defaults
+    allRules = false // activate all available (even unstable) rules.
+    config.setFrom("$rootDir/config/detekt.yml") // point to your custom config defining rules to run, overwriting default behavior
+    baseline = file("$rootDir/config/detekt-baseline.xml") // a way of suppressing issues before introducing detekt
+}
+
 val rootProjectBuildTask = rootProject.tasks.getByName("build")
 
 tasks {
     // prohibit build without verification
     rootProjectBuildTask.dependsOn(getByName("koverCachedVerify"))
     // prohibit build without running detekt
-    rootProjectBuildTask.dependsOn(getByName("detekt"))
+    rootProjectBuildTask.dependsOn(getByName("detektMain"))
+    rootProjectBuildTask.dependsOn(getByName("detektTest"))
 }
