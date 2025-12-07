@@ -1,0 +1,66 @@
+public final class build/extensions/oss/gradle/pluginutils/test/integration/TestProject : build/extensions/oss/gradle/pluginutils/test/DirectoryBuilder, java/lang/AutoCloseable {
+	public static final field Companion Lbuild/extensions/oss/gradle/pluginutils/test/integration/TestProject$Companion;
+	public fun <init> (Ljava/lang/String;)V
+	public synthetic fun <init> (Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun <init> (Ljava/lang/String;Ljava/io/File;)V
+	public fun close ()V
+	public fun directory (Ljava/lang/String;Lkotlin/jvm/functions/Function1;)V
+	public fun file (Ljava/lang/String;Ljava/lang/String;ZLjava/nio/charset/Charset;)V
+	public final fun getBuildDir ()Ljava/io/File;
+	public fun getPath ()Ljava/nio/file/Path;
+	public final fun getProjectDir ()Ljava/io/File;
+	public final fun getProjectName ()Ljava/lang/String;
+	public final fun newGradleRunner ()Lorg/gradle/testkit/runner/GradleRunner;
+	public final fun runGradle (Ljava/lang/String;[Ljava/lang/String;ZLjava/util/Map;Lkotlin/jvm/functions/Function1;)Lorg/gradle/testkit/runner/BuildResult;
+	public final fun runGradle (Ljava/util/List;[Ljava/lang/String;ZLjava/util/Map;Lkotlin/jvm/functions/Function1;)Lorg/gradle/testkit/runner/BuildResult;
+	public static synthetic fun runGradle$default (Lbuild/extensions/oss/gradle/pluginutils/test/integration/TestProject;Ljava/lang/String;[Ljava/lang/String;ZLjava/util/Map;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lorg/gradle/testkit/runner/BuildResult;
+	public static synthetic fun runGradle$default (Lbuild/extensions/oss/gradle/pluginutils/test/integration/TestProject;Ljava/util/List;[Ljava/lang/String;ZLjava/util/Map;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lorg/gradle/testkit/runner/BuildResult;
+	public final fun withProjectDir (Lkotlin/jvm/functions/Function1;)V
+}
+
+public final class build/extensions/oss/gradle/pluginutils/test/integration/TestProject$Companion {
+	public final fun createTempDir (Ljava/lang/String;)Ljava/io/File;
+}
+
+public abstract interface annotation class build/extensions/oss/gradle/pluginutils/test/integration/junit/GradleIntegrationTest : java/lang/annotation/Annotation {
+}
+
+public final class build/extensions/oss/gradle/pluginutils/test/integration/junit/GradleProjectDirExtension : org/junit/jupiter/api/extension/ParameterResolver {
+	public fun <init> ()V
+	public fun resolveParameter (Lorg/junit/jupiter/api/extension/ParameterContext;Lorg/junit/jupiter/api/extension/ExtensionContext;)Ljava/lang/Object;
+	public fun supportsParameter (Lorg/junit/jupiter/api/extension/ParameterContext;Lorg/junit/jupiter/api/extension/ExtensionContext;)Z
+}
+
+public final class build/extensions/oss/gradle/pluginutils/test/integration/junit/GradleRunnerExtension : org/junit/jupiter/api/extension/ParameterResolver {
+	public fun <init> ()V
+	public fun resolveParameter (Lorg/junit/jupiter/api/extension/ParameterContext;Lorg/junit/jupiter/api/extension/ExtensionContext;)Ljava/lang/Object;
+	public fun supportsParameter (Lorg/junit/jupiter/api/extension/ParameterContext;Lorg/junit/jupiter/api/extension/ExtensionContext;)Z
+}
+
+public final class build/extensions/oss/gradle/pluginutils/test/integration/junit/GradleRunnerKt {
+	public static final fun runGradle (Lorg/gradle/testkit/runner/GradleRunner;[Ljava/lang/String;Z)Lorg/gradle/testkit/runner/BuildResult;
+	public static synthetic fun runGradle$default (Lorg/gradle/testkit/runner/GradleRunner;[Ljava/lang/String;ZILjava/lang/Object;)Lorg/gradle/testkit/runner/BuildResult;
+}
+
+public abstract interface annotation class build/extensions/oss/gradle/pluginutils/test/integration/junit/GradleVersions : java/lang/annotation/Annotation {
+	public abstract fun value ()[Ljava/lang/String;
+}
+
+public abstract interface annotation class build/extensions/oss/gradle/pluginutils/test/integration/junit/ProjectDir : java/lang/annotation/Annotation {
+}
+
+public abstract interface annotation class build/extensions/oss/gradle/pluginutils/test/integration/junit/SetupProjectDir : java/lang/annotation/Annotation {
+}
+
+public final class build/extensions/oss/gradle/pluginutils/test/integration/junit/SetupProjectDirFunctionalKt {
+	public static final fun setupProjectDir (Lkotlin/jvm/functions/Function1;)Lorg/junit/jupiter/api/extension/Extension;
+}
+
+public abstract interface annotation class build/extensions/oss/gradle/pluginutils/test/integration/junit/TestEachGradleVersion : java/lang/annotation/Annotation {
+}
+
+public final class build/extensions/oss/gradle/pluginutils/test/integration/kotest/KotestExtensionsKt {
+	public static final fun testProject (Lio/kotest/core/TestConfiguration;Ljava/lang/String;)Lbuild/extensions/oss/gradle/pluginutils/test/integration/TestProject;
+	public static synthetic fun testProject$default (Lio/kotest/core/TestConfiguration;Ljava/lang/String;ILjava/lang/Object;)Lbuild/extensions/oss/gradle/pluginutils/test/integration/TestProject;
+}
+

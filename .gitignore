@@ -1,5 +1,6 @@
 # Gradle
 .gradle/
+.kotlin
 
 # Ignore all files in build folders, however we must ask git to enumerate files - see below
 build/**
