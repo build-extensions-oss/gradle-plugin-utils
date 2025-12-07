@@ -1,5 +1,5 @@
 [versions]
-assertk = "0.26.1"
+assertk = "0.28.1"
 junit = "5.10.0"
 kotest = "5.7.0"
 mockk = "1.13.7"
