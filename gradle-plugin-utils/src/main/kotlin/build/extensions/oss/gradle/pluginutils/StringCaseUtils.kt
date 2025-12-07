@@ -1,8 +1,5 @@
 package build.extensions.oss.gradle.pluginutils
 
-import kotlin.text.capitalize as kotlinCapitalize
-import kotlin.text.decapitalize as kotlinDecapitalize
-
 
 /**
  * Split a string into words. All characters that are not letters or digits are considered separators.
@@ -16,15 +13,7 @@ import kotlin.text.decapitalize as kotlinDecapitalize
  * @return a [Sequence] of words in the string
  */
 fun String.splitIntoWords(): Sequence<String> = sequence {
-
     val builder = StringBuilder()
-
-    val charToLowerCase: Char.() -> Char =
-        if (KotlinVersion.CURRENT.isAtLeast(1, 5)) {
-            { lowercaseChar() }
-        } else {
-            { @Suppress("DEPRECATION") toLowerCase() }
-        }
 
     this@splitIntoWords.forEach { ch ->
         if (ch.isUpperCase()) {
@@ -32,7 +21,7 @@ fun String.splitIntoWords(): Sequence<String> = sequence {
                 yield(builder.toString())
                 builder.setLength(0)
             }
-            builder.append(ch.charToLowerCase())
+            builder.append(ch.lowercaseChar())
 
         } else if (!ch.isLetterOrDigit()) {
             if (builder.isNotEmpty()) {
@@ -80,8 +69,9 @@ fun String.capitalize(): String =
     if (KotlinVersion.CURRENT.isAtLeast(1, 5)) {
         if (isEmpty() || this[0].isUpperCase()) this else replaceFirstChar { it.uppercaseChar() }
     } else {
-        @Suppress("DEPRECATION")
-        kotlinCapitalize()
+        replaceFirstChar { firstChar ->
+            firstChar.titlecase()
+        }
     }
 
 
@@ -89,14 +79,11 @@ fun String.capitalize(): String =
  * Returns a copy of this string having its first letter lowercased using the rules of the default locale,
  * or the original string if it's empty or already starts with a lower case letter.
  */
-fun String.decapitalize(): String =
-    if (KotlinVersion.CURRENT.isAtLeast(1, 5)) {
-        if (isEmpty() || this[0].isLowerCase()) {
-            this
-        } else {
-            replaceFirstChar { it.lowercaseChar() }
-        }
+fun String.decapitalize(): String {
+    return if (isEmpty() || this[0].isLowerCase()) {
+        this
     } else {
-        @Suppress("DEPRECATION")
-        kotlinDecapitalize()
+        replaceFirstChar { it.lowercaseChar() }
     }
+}
+
