@@ -41,6 +41,13 @@ dependencies {
     compileOnly(kotlin("stdlib-jdk8"))
 }
 
+kover {
+    currentProject {
+        sources {
+            excludedSourceSets.add("test")
+        }
+    }
+}
 
 configure<JavaPluginExtension> {
     withSourcesJar()
