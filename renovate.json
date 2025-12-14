@@ -7,6 +7,6 @@
     "We specify more operating memory for Gradle run, because default 0.5Gb isn't enough to quickly precompile the Gradle code. Renovate allocates 3Gb RAM and 15 GB disk space"
   ],
   "env": {
-    "GRADLE_OPTS": "-Dorg.gradle.jvmargs=-Xmx2500M -Dkotlin.compiler.execution.strategy=\"in-process\""
+    "GRADLE_OPTS": "-Dorg.gradle.jvmargs=-Xmx2500M -Dkotlin.compiler.execution.strategy=\"in-process\" -Dorg.gradle.daemon=false"
   }
 }
