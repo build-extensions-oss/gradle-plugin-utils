@@ -3,8 +3,10 @@
   "extends": [
     "config:recommended"
   ],
+  "description": [
+    "We specify more operating memory for Gradle run, because default 0.5Gb isn't enough to quickly precompile the Gradle code. Renovate allocates 3Gb RAM and 15 GB disk space"
+  ],
   "env": {
-    "description": "We specify more operating memory for Gradle run, because default 0.5Gb isn't enough to quickly precompile the Gradle code. Renovate allocates 3Gb RAM and 15 GB disk space",
     "GRADLE_OPTS": "-Dorg.gradle.jvmargs=-Xmx2500M"
   }
 }
