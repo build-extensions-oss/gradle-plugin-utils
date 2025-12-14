@@ -2,5 +2,11 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:recommended"
-  ]
+  ],
+  "env": {
+    "description": [
+      "We specify more operating memory for Gradle run, because default 0.5Gb isn't enough to quickly precompile the Gradle code"
+    ],
+    "GRADLE_OPTS": "-Dorg.gradle.jvmargs=-Xmx4G"
+  }
 }
