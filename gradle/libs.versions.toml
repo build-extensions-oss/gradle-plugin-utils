@@ -1,6 +1,6 @@
 [versions]
 assertk = "0.26.1"
-junit = "5.10.0"
+junit = "5.14.1"
 kotest = "5.9.1"
 mockk = "1.13.7"
 reflections = "0.10.2"
