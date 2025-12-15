@@ -2,23 +2,20 @@ package build.extensions.oss.gradle.pluginutils
 
 import assertk.assertThat
 import assertk.assertions.isInstanceOf
-import io.kotest.core.spec.style.StringSpec
 import org.gradle.api.Project
 import org.gradle.api.provider.ListProperty
 import org.gradle.api.provider.MapProperty
 import org.gradle.api.provider.Property
 import org.gradle.api.provider.SetProperty
 import org.gradle.testfixtures.ProjectBuilder
+import org.junit.jupiter.api.Test
 
 
-@Suppress("UnstableApiUsage")
-class ObjectFactoryExtensionsTest : StringSpec({
-
-    val project: Project = ProjectBuilder.builder()
-        .build()
-
-
-    "property" {
+class ObjectFactoryExtensionsTest {
+    @Test
+    fun property() {
+        val project: Project = ProjectBuilder.builder()
+            .build()
 
         val property = project.objects.property<String>()
 
@@ -26,8 +23,10 @@ class ObjectFactoryExtensionsTest : StringSpec({
             .isInstanceOf(Property::class.java)
     }
 
-
-    "listProperty" {
+    @Test
+    fun listProperty() {
+        val project: Project = ProjectBuilder.builder()
+            .build()
 
         val property = project.objects.listProperty<String>()
 
@@ -35,8 +34,10 @@ class ObjectFactoryExtensionsTest : StringSpec({
             .isInstanceOf(ListProperty::class.java)
     }
 
-
-    "setProperty" {
+    @Test
+    fun setProperty() {
+        val project: Project = ProjectBuilder.builder()
+            .build()
 
         val property = project.objects.setProperty<String>()
 
@@ -44,12 +45,14 @@ class ObjectFactoryExtensionsTest : StringSpec({
             .isInstanceOf(SetProperty::class.java)
     }
 
-
-    "mapProperty" {
+    @Test
+    fun mapProperty() {
+        val project: Project = ProjectBuilder.builder()
+            .build()
 
         val property = project.objects.mapProperty<String, String>()
 
         assertThat(property, "property")
             .isInstanceOf(MapProperty::class.java)
     }
-})
+}
