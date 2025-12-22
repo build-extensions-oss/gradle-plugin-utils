@@ -12,7 +12,6 @@ import org.gradle.api.Project
 import org.gradle.api.plugins.ExtraPropertiesExtension
 import org.gradle.testfixtures.ProjectBuilder
 import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import java.time.Duration
 
@@ -21,7 +20,6 @@ import java.time.Duration
  *
  * The goal is to stop using Spec, because it is hard to run individual tests from IDE without additional plugins installation.
  */
-@Disabled("https://github.com/build-extensions-oss/gradle-plugin-utils/issues/41")
 class ProjectPropertiesTest {
     lateinit var project: Project
 
