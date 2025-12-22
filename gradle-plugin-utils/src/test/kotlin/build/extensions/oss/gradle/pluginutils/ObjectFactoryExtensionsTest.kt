@@ -10,7 +10,6 @@ import org.gradle.api.provider.SetProperty
 import org.gradle.testfixtures.ProjectBuilder
 import org.junit.jupiter.api.Test
 
-
 class ObjectFactoryExtensionsTest {
     @Test
     fun property() {
