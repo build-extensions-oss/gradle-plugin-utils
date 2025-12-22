@@ -22,17 +22,15 @@ repositories {
     mavenCentral()
 }
 
+val projectJvmTarget = JvmTarget.JVM_17
+val projectJvmTargetInt = 17
+
 configure<KotlinJvmProjectExtension> {
-    // Set the toolchain 11 to do everything, because kotest doesn't support Java 8
-    jvmToolchain(11)
+    // Set the lowest supported Java
+    jvmToolchain(projectJvmTargetInt)
 }
 
-
-val projectJvmTarget = JvmTarget.JVM_11
-val projectJvmTargetInt = 11
-
 configure<KotlinJvmProjectExtension> {
-    // Set the toolchain 11 to do everything, because kotest doesn't support Java 8
     jvmToolchain(projectJvmTargetInt)
 }
 

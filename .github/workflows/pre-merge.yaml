@@ -22,8 +22,8 @@ jobs:
       matrix:
         # build project on some operating systems
         os: [ ubuntu-latest, windows-latest, macos-latest ]
-        # build on different java versions
-        jdk: [ 11, 17, 21 ]
+        # build on all supported LTS java versions
+        jdk: [ 17, 21 ]
     runs-on: ${{ matrix.os }}
     steps:
       # https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-gradle#using-the-gradle-starter-workflow
