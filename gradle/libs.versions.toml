@@ -1,7 +1,7 @@
 [versions]
 assertk = "0.26.1"
-junit = "5.10.0"
-kotest = "5.7.0"
+junit = "5.14.1"
+kotest = "5.9.1"
 mockk = "1.13.7"
 reflections = "0.10.2"
 spek2 = "2.0.19"
@@ -10,6 +10,7 @@ spek2 = "2.0.19"
 assertk-core = { module = "com.willowtreeapps.assertk:assertk", version.ref = "assertk" }
 
 junit-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit" }
+junit-jupiter-params= { module = "org.junit.jupiter:junit-jupiter-params", version.ref = "junit" }
 
 kotest-api = { module = "io.kotest:kotest-framework-api", version.ref = "kotest" }
 kotest-runner = { module = "io.kotest:kotest-runner-junit5", version.ref = "kotest" }
@@ -20,3 +21,17 @@ mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 reflections = { module = "org.reflections:reflections", version.ref = "reflections" }
 
 spek-dsl = { module = "org.spekframework.spek2:spek-dsl", version.ref = "spek2" }
+
+org-jetbrains-kotlinx-kover = { module = "org.jetbrains.kotlinx:kover-gradle-plugin", version = "0.9.3" }
+
+# this plugin is referenced in buildSrc
+com-vanniktech-maven-publish-gradle-plugin = { module = "com.vanniktech.maven.publish:com.vanniktech.maven.publish.gradle.plugin", version = "0.34.0" }
+
+# https://github.com/detekt/detekt
+# It must be compatible with Kotlin version, therefore it must be also compatible with Gradle (we use the version of the embedded Kotlin)
+# See https://detekt.dev/docs/introduction/compatibility/
+io-gitlab-arturbosch-detekt-detekt-gradle-plugin = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version = "1.23.6" }
+
+org-jetbrains-kotlinx-binary-compatibility-validator-gradle-plugin = { module = "org.jetbrains.kotlinx.binary-compatibility-validator:org.jetbrains.kotlinx.binary-compatibility-validator.gradle.plugin", version = "0.16.1" }
+
+[plugins]

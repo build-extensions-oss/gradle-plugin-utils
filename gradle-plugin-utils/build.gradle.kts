@@ -1,18 +1,28 @@
 plugins {
-    kotlin("jvm")
-    `java-library`
-    `maven-publish`
-    id("org.jetbrains.dokka")
+    id("kotlin-convention") // keep shared logic here
 }
 
 
 dependencies {
     compileOnly(gradleApi())
 
-    "testImplementation"(gradleApi())
-    "testImplementation"(project(":gradle-plugin-test-utils"))
-    "testImplementation"(libs.kotest.runner)
-    "testImplementation"(libs.kotest.property)
-    "testImplementation"(libs.assertk.core)
-    "testImplementation"(libs.mockk)
+    testImplementation(gradleApi())
+    testImplementation(project(":gradle-plugin-test-utils"))
+    testImplementation(libs.junit.jupiter.params)
+    testImplementation(libs.kotest.runner)
+    testImplementation(libs.kotest.property)
+    testImplementation(libs.assertk.core)
+    testImplementation(libs.mockk)
+}
+
+/**
+ * See https://docs.gradle.org/current/userguide/upgrading_version_7.html#remove_test_add_opens .
+ *
+ * These options are added by default for Gradle plugin projects, however we have to mention them manually to support Java 17.
+ */
+tasks.withType(Test::class.java).configureEach {
+    jvmArgs(
+        "--add-opens=java.base/java.lang=ALL-UNNAMED",
+        "--add-opens=java.base/java.util=ALL-UNNAMED"
+    )
 }

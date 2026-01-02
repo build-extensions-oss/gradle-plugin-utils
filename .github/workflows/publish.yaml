@@ -1,0 +1,54 @@
+name: Plugin publish
+
+# This workflow is strictly manual
+# https://docs.github.com/en/actions/using-workflows/manually-running-a-workflow
+on:
+  workflow_dispatch:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+
+jobs:
+  gradle:
+    runs-on: ubuntu-latest
+
+    environment:
+      # This job must only run in Publishing environment. It is protected from the majority of runs, which prevents Gradle secrets leakage
+      name: Publishing
+      url: https://github.com/build-extensions-oss/gradle-plugin-utils/settings/environments/10454071555/edit
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      # Protect from putting custom jar as a gradle wrapper
+      # https://github.com/gradle/actions/tree/main/wrapper-validation
+      - name: Validate Gradle wrapper
+        uses: gradle/actions/wrapper-validation@v5
+
+      # https://github.com/marketplace/actions/setup-java-jdk
+      - name: Set up JDK 17
+        uses: actions/setup-java@3a4f6e1af504cf6a31855fa899c6aa5355ba6c12 # v4.7.0
+        with:
+          java-version: 17
+          distribution: 'temurin'
+
+      # Optimize Gradle execution
+      # https://github.com/marketplace/actions/build-with-gradle
+      - name: Setup Gradle
+        with:
+          # disable cache for publication. We build from scratch here, so let's avoid having a theoretical vulnerability when cache entry was put in a declined PR, however reused by this build
+          cache-disabled: true
+        uses: gradle/actions/setup-gradle@v5
+
+      # Build and publish the project by simply running the command line
+      - name: Publish the project
+        # publish to maven central and additionally correct the version - use it from the tag name (e.g. it should be like 1.2.3 and so on)
+        run: ./gradlew publishToMavenCentral -Pversion=${{ github.event.release.tag_name }} --stacktrace
+        env:
+          ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
+          ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
+          ORG_GRADLE_PROJECT_signingInMemoryKeyId: ${{ secrets.SIGNING_KEY_ID }}
+          ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.SIGNING_KEY_RING_FILE_CONTENT }}
