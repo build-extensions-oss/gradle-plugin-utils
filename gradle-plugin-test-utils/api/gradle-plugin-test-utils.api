@@ -1,6 +1,8 @@
 public abstract interface class build/extensions/oss/gradle/pluginutils/test/DirectoryBuilder {
 	public abstract fun directory (Ljava/lang/String;Lkotlin/jvm/functions/Function1;)V
+	public static synthetic fun directory$default (Lbuild/extensions/oss/gradle/pluginutils/test/DirectoryBuilder;Ljava/lang/String;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)V
 	public abstract fun file (Ljava/lang/String;Ljava/lang/String;ZLjava/nio/charset/Charset;)V
+	public static synthetic fun file$default (Lbuild/extensions/oss/gradle/pluginutils/test/DirectoryBuilder;Ljava/lang/String;Ljava/lang/String;ZLjava/nio/charset/Charset;ILjava/lang/Object;)V
 	public abstract fun getPath ()Ljava/nio/file/Path;
 }
 
@@ -111,7 +113,7 @@ public abstract interface annotation class build/extensions/oss/gradle/pluginuti
 }
 
 public abstract interface class build/extensions/oss/gradle/pluginutils/test/spek/MemoizedGradleProject : org/spekframework/spek2/lifecycle/MemoizedValue {
-	public abstract fun applyPlugin (Lkotlin/reflect/KClass;)V
+	public fun applyPlugin (Lkotlin/reflect/KClass;)V
 	public abstract fun getProjectName ()Ljava/lang/String;
 	public abstract fun initializer (Lkotlin/jvm/functions/Function1;)V
 	public abstract fun setProjectName (Ljava/lang/String;)V
