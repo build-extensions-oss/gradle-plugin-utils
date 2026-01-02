@@ -1,17 +1,7 @@
 package build.extensions.oss.gradle.pluginutils
 
-import org.gradle.api.plugins.Convention
 import org.gradle.api.plugins.ExtensionAware
 
-
-@Deprecated(
-    message = "Deprecated - disallow late runtime cast",
-    replaceWith = ReplaceWith("extension(name, T::class.java)")
-)
-fun <T : Any> Any.extension(name: String): T? {
-    @Suppress("UNCHECKED_CAST")
-    return extension(name, Any::class.java) as T?
-}
 
 /**
  * Gets the extension of the given name if it exists.
@@ -28,15 +18,6 @@ fun <T : Any> Any.extension(name: String, clazz: Class<T>): T? {
     return clazz.cast(resultCandidate)
 }
 
-
-@Deprecated(
-    message = "Deprecated - disallow late runtime cast",
-    replaceWith = ReplaceWith("requiredExtension(name, T::class.java)")
-)
-fun <T : Any> Any.requiredExtension(name: String): T {
-    @Suppress("UNCHECKED_CAST")
-    return requiredExtension(name, Any::class.java) as T
-}
 
 /**
  * Gets the extension of the given name, throwing an exception if it does not exist.
@@ -78,17 +59,3 @@ inline fun <reified T : Any> Any.extension(): T? =
  */
 inline fun <reified T : Any> Any.requiredExtension(): T =
     (this as ExtensionAware).extensions.getByType(typeOf<T>())
-
-
-/**
- * Gets the convention plugin object of the given type, throwing an exception if it does not exist.
- *
- * @receiver the object containing conventions
- * @param <T> the convention type
- * @return the convention plugin object
- * @throws ClassCastException if the receiver object does not support conventions
- * @throws IllegalStateException if the convention plugin does not exist
- */
-@Deprecated("prefer extension objects over conventions")
-inline fun <reified T : Any> Any.requiredConventionPlugin(): T =
-    ((this as ExtensionAware).extensions as Convention).getPlugin(T::class.java)
