@@ -8,9 +8,7 @@ public final class build/extensions/oss/gradle/pluginutils/DurationUtilsKt {
 }
 
 public final class build/extensions/oss/gradle/pluginutils/ExtensionUtilsKt {
-	public static final fun extension (Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
 	public static final fun extension (Ljava/lang/Object;Ljava/lang/String;Ljava/lang/Class;)Ljava/lang/Object;
-	public static final fun requiredExtension (Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
 	public static final fun requiredExtension (Ljava/lang/Object;Ljava/lang/String;Ljava/lang/Class;)Ljava/lang/Object;
 }
 
