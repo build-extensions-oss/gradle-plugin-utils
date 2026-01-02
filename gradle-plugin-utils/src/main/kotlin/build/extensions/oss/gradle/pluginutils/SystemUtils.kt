@@ -1,18 +1,29 @@
 package build.extensions.oss.gradle.pluginutils
 
-
+/**
+ * The code is used in Gradle Helm Plugin - to put proper classifier and archive format depending on operating system.
+ *
+ * Suffixes below are very common for binary distribution, so they work for other packages as well.
+ */
 object SystemUtils {
 
     private val osName = System.getProperty("os.name")
     private val osArch = System.getProperty("os.arch")
 
-
+    /**
+     * Returns operating system classifier for Helm package.
+     */
+    // Suppress the error - it is easier to list all options in a one place.
+    @Suppress("complexity:CyclomaticComplexMethod")
     fun getOperatingSystemClassifier() =
         when {
             osName.startsWith("Windows") ->
                 "windows-amd64"
             osName.startsWith("Mac OS X") ->
-                "darwin-amd64"
+                when (osArch) {
+                    "aarch64" -> "darwin-arm64"
+                    else -> "darwin-amd64"
+                }
             osName.startsWith("Linux") ->
                 when (osArch) {
                     "amd64" -> "linux-amd64"
