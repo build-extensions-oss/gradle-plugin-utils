@@ -72,6 +72,8 @@ internal class GradleVersionsExtension : BeforeAllCallback, BeforeEachCallback, 
     }
 
 
+    // suppress false positive
+    @Suppress("UnusedPrivateMember")
     private fun GradleVersions.parseVersions(): List<String> =
         value.asSequence()
             .flatMap { parseVersions(it) }

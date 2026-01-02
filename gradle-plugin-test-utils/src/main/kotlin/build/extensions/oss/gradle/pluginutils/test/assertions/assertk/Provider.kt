@@ -19,7 +19,7 @@ import java.io.File
  * Asserts that the [Provider] has a value present, and transforms the assertion so one can
  * continue asserting on the provided value.
  */
-fun <T : Any?> Assert<Provider<out T>>.isPresent() = transform { actual ->
+fun <T : Any> Assert<Provider<out T>>.isPresent() = transform { actual ->
     actual.orNull ?: expected("${show(actual)} to have a value", actual = actual)
 }
 
@@ -43,7 +43,7 @@ fun Assert<Provider<Boolean>>.isFalse() =
  *
  * @param value the expected value
  */
-fun <T : Any?> Assert<Provider<T>>.hasValueEqualTo(value: T) =
+fun <T : Any> Assert<Provider<T>>.hasValueEqualTo(value: T) =
     isPresent().isEqualTo(value)
 
 

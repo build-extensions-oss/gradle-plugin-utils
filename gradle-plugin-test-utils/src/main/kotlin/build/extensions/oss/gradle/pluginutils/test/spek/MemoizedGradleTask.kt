@@ -22,7 +22,8 @@ fun <T : Task> LifecycleAware.gradleTask(
     config: T.() -> Unit = {}
 ): MemoizedValue<T> {
     val project: Project by memoized()
-    val actualName = name ?: taskType.simpleName?.decapitalize() ?: "task"
+    val actualName = name ?: (taskType.simpleName?.decapitalize() ?: "task")
+
     return memoized<T> {
         project.tasks.create(actualName, taskType.java, Action(config))
     }

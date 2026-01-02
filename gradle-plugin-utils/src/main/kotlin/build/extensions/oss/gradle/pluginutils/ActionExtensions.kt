@@ -10,7 +10,7 @@ import org.gradle.api.Action
  * @param other the other action to execute, `null` is interpreted as an empty action
  * @return the combined action, or `null` if both input actions are `null`
  */
-fun <T> Action<T>?.andThen(other: Action<T>?): Action<T>? =
+fun <T : Any> Action<T>?.andThen(other: Action<T>?): Action<T>? =
     when {
         this == null -> other
         other == null -> this
@@ -27,7 +27,7 @@ fun <T> Action<T>?.andThen(other: Action<T>?): Action<T>? =
  * @receiver a [Collection] of [Action]s
  * @return a single [Action] that executes all given actions in order, or `null` if the collection is empty
  */
-fun <T> Collection<Action<in T>>.combine(): Action<T>? {
+fun <T : Any> Collection<Action<in T>>.combine(): Action<T>? {
 
     if (isEmpty()) return null
 
