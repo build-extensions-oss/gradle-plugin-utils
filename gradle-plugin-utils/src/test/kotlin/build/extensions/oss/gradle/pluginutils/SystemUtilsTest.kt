@@ -13,7 +13,8 @@ import org.junit.jupiter.api.condition.OS
  *
  * We can't check (for example) it easily on ARM on GitHub.
  *
- * We run the same test on different operating systems, so we will never run all methods from this class at the same test run.
+ * We run the same test on different operating systems,
+ * so we will never run all methods from this class at the same test run.
  */
 class SystemUtilsTest {
 
