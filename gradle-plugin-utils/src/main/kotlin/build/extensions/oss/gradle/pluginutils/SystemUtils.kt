@@ -6,7 +6,10 @@ object SystemUtils {
     private val osName = System.getProperty("os.name")
     private val osArch = System.getProperty("os.arch")
 
-
+    /**
+     * Suppress the error - it is easier to list all options in a one place.
+     */
+    @Suppress("complexity:CyclomaticComplexMethod")
     fun getOperatingSystemClassifier() =
         when {
             osName.startsWith("Windows") ->
