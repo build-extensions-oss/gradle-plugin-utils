@@ -1,7 +1,7 @@
 package build.extensions.oss.gradle.pluginutils
 
-import assertk.assertThat
-import assertk.assertions.isInstanceOf
+import io.kotest.matchers.should
+import io.kotest.matchers.types.beInstanceOf
 import org.gradle.api.Project
 import org.gradle.api.provider.ListProperty
 import org.gradle.api.provider.MapProperty
@@ -18,8 +18,7 @@ class ObjectFactoryExtensionsTest {
 
         val property = project.objects.property<String>()
 
-        assertThat(property, "property")
-            .isInstanceOf(Property::class.java)
+        property should beInstanceOf<Property<*>>()
     }
 
     @Test
@@ -29,8 +28,7 @@ class ObjectFactoryExtensionsTest {
 
         val property = project.objects.listProperty<String>()
 
-        assertThat(property, "property")
-            .isInstanceOf(ListProperty::class.java)
+        property should beInstanceOf<ListProperty<*>>()
     }
 
     @Test
@@ -40,8 +38,7 @@ class ObjectFactoryExtensionsTest {
 
         val property = project.objects.setProperty<String>()
 
-        assertThat(property, "property")
-            .isInstanceOf(SetProperty::class.java)
+        property should beInstanceOf<SetProperty<*>>()
     }
 
     @Test
@@ -51,7 +48,6 @@ class ObjectFactoryExtensionsTest {
 
         val property = project.objects.mapProperty<String, String>()
 
-        assertThat(property, "property")
-            .isInstanceOf(MapProperty::class.java)
+        property should beInstanceOf<MapProperty<*, *>>()
     }
 }

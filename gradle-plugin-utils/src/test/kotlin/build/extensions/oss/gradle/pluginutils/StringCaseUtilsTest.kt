@@ -1,8 +1,6 @@
 package build.extensions.oss.gradle.pluginutils
 
-import assertk.assertThat
-import assertk.assertions.containsExactly
-import assertk.assertions.isEqualTo
+import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
@@ -12,16 +10,14 @@ class StringCaseUtilsTest {
     fun `single word`() {
         val words = "word".splitIntoWords().toList()
 
-        assertThat(words)
-            .containsExactly("word")
+        words shouldBe listOf("word")
     }
 
     @Test
     fun `two words camel case`() {
         val words = "twoWords".splitIntoWords().toList()
 
-        assertThat(words)
-            .containsExactly("two", "words")
+        words shouldBe listOf("two", "words")
     }
 
     @ParameterizedTest
@@ -32,6 +28,6 @@ class StringCaseUtilsTest {
 
         val words = concatenated.splitIntoWords().toList()
 
-        assertThat(words).isEqualTo(expectedWords)
+        words shouldBe expectedWords
     }
 }

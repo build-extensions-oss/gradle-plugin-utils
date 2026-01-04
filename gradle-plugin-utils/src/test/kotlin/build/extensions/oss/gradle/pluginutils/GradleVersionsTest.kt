@@ -1,12 +1,11 @@
 package build.extensions.oss.gradle.pluginutils
 
-import assertk.assertThat
-import assertk.assertions.hasMessage
-import assertk.assertions.isEqualTo
-import assertk.assertions.isFailure
-import assertk.assertions.isInstanceOf
-import assertk.assertions.isNotNull
-import assertk.assertions.isSuccess
+import io.kotest.assertions.throwables.shouldNotThrowAny
+import io.kotest.assertions.throwables.shouldThrow
+import io.kotest.matchers.should
+import io.kotest.matchers.shouldBe
+import io.kotest.matchers.shouldNotBe
+import io.kotest.matchers.throwable.haveMessage
 import io.mockk.mockk
 import io.mockk.verify
 import org.gradle.util.GradleVersion
@@ -47,41 +46,43 @@ class GradleVersionsTest {
 
         val versionProperty = allVersionProperties[versionPropertyName]
 
-        assertThat(versionProperty, name = "Version property").isNotNull()
-            .transform { it.get(GradleVersions) }
-            .isEqualTo(version)
+        versionProperty shouldNotBe null
+        versionProperty!!.get(GradleVersions) shouldBe version
     }
 
     @Test
     fun `checkGradleVersion with message should return normally if the version is ok`() {
-        assertThat {
-            checkGradleVersion(GradleVersions.Version_6_2) { "version too low" }
-        }.isSuccess()
+        shouldNotThrowAny {
+            checkGradleVersion(GradleVersions.Version_6_2) {
+                "version too low"
+            }
+        }
     }
 
     @Test
     fun `should throw an exception if the version is too low`() {
-        assertThat {
+        val exception = shouldThrow<IllegalStateException> {
             checkGradleVersion(veryHighVersion) { "version too low" }
-        }.isFailure()
-            .isInstanceOf(IllegalStateException::class)
-            .hasMessage("version too low")
+        }
+
+        exception should haveMessage("version too low")
     }
 
     @Test
     fun `checkGradleVersion with plugin ID should return normally if the version is ok`() {
-        assertThat {
+        shouldNotThrowAny {
             checkGradleVersion(GradleVersions.Version_6_2, "test.plugin")
-        }.isSuccess()
+        }
     }
 
     @Test
     fun `checkGradleVersion with plugin ID should throw an exception if the version is too low`() {
-        assertThat {
+
+        val exception = shouldThrow<IllegalStateException> {
             checkGradleVersion(veryHighVersion, "test.plugin")
-        }.isFailure()
-            .isInstanceOf(IllegalStateException::class)
-            .hasMessage("The plugin \"test.plugin\" requires at least Gradle 9999.99")
+        }
+
+        exception should haveMessage("The plugin \"test.plugin\" requires at least Gradle 9999.99")
     }
 
     @Test

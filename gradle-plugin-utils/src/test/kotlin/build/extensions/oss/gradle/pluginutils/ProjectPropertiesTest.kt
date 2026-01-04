@@ -1,13 +1,9 @@
 package build.extensions.oss.gradle.pluginutils
 
-import assertk.assertThat
-import assertk.assertions.isEqualTo
-import assertk.assertions.isFailure
-import assertk.assertions.isFalse
-import assertk.assertions.isInstanceOf
-import assertk.assertions.isNotNull
-import assertk.assertions.isNull
-import assertk.assertions.isTrue
+import io.kotest.assertions.throwables.shouldThrow
+import io.kotest.matchers.should
+import io.kotest.matchers.shouldBe
+import io.kotest.matchers.string.endWith
 import org.gradle.api.Project
 import org.gradle.api.plugins.ExtraPropertiesExtension
 import org.gradle.testfixtures.ProjectBuilder
@@ -36,24 +32,21 @@ class ProjectPropertiesTest {
 
         val provider = project.providerFromProjectProperty("testProperty")
 
-        assertThat(provider.orNull)
-            .isEqualTo("testValue")
+        provider.orNull shouldBe "testValue"
     }
 
     @Test
     fun `providerFromProjectProperty_should not have a value if project property is not set`() {
         val provider = project.providerFromProjectProperty("testProperty")
 
-        assertThat(provider.orNull)
-            .isNull()
+        provider.orNull shouldBe null
     }
 
     @Test
     fun `providerFromProjectProperty_should use the default value if project property is not set`() {
         val provider = project.providerFromProjectProperty("testProperty", "defaultValue")
 
-        assertThat(provider.orNull)
-            .isEqualTo("defaultValue")
+        provider.orNull shouldBe "defaultValue"
     }
 
     @Test
@@ -63,8 +56,7 @@ class ProjectPropertiesTest {
 
         val provider = project.providerFromProjectProperty("testProperty", "defaultValue")
 
-        assertThat(provider.orNull)
-            .isEqualTo("testValue")
+        provider.orNull shouldBe "testValue"
     }
 
     @Test
@@ -76,9 +68,7 @@ class ProjectPropertiesTest {
 
         val provider = project.providerFromProjectProperty("testProperty", evaluateGString = true)
 
-        assertThat(provider.orNull)
-            .isEqualTo("ver1.2.3")
-
+        provider.orNull shouldBe "ver1.2.3"
     }
 
     @Test
@@ -88,8 +78,7 @@ class ProjectPropertiesTest {
 
         val provider = project.booleanProviderFromProjectProperty("testProperty")
 
-        assertThat(provider.orNull)
-            .isNotNull().isTrue()
+        provider.orNull shouldBe true
     }
 
     @Test
@@ -99,8 +88,7 @@ class ProjectPropertiesTest {
 
         val provider = project.booleanProviderFromProjectProperty("testProperty")
 
-        assertThat(provider.orNull)
-            .isNotNull().isTrue()
+        provider.orNull shouldBe true
     }
 
     @Test
@@ -110,24 +98,21 @@ class ProjectPropertiesTest {
 
         val provider = project.booleanProviderFromProjectProperty("testProperty")
 
-        assertThat(provider.orNull)
-            .isNotNull().isFalse()
+        provider.orNull shouldBe false
     }
 
     @Test
     fun `booleanProviderFromProjectProperty_should not have a value if project property is not set`() {
         val provider = project.booleanProviderFromProjectProperty("testProperty")
 
-        assertThat(provider.orNull)
-            .isNull()
+        provider.orNull shouldBe null
     }
 
     @Test
     fun `booleanProviderFromProjectProperty_should use the default value if project property is not set`() {
         val provider = project.booleanProviderFromProjectProperty("testProperty", true)
 
-        assertThat(provider.orNull)
-            .isNotNull().isTrue()
+        provider.orNull shouldBe true
     }
 
     @Test
@@ -137,8 +122,7 @@ class ProjectPropertiesTest {
 
         val provider = project.booleanProviderFromProjectProperty("testProperty", true)
 
-        assertThat(provider.orNull)
-            .isNotNull().isFalse()
+        provider.orNull shouldBe false
     }
 
     @Test
@@ -148,9 +132,7 @@ class ProjectPropertiesTest {
 
         val provider = project.intProviderFromProjectProperty("testProperty")
 
-        assertThat(provider.orNull)
-            .isEqualTo(42)
-
+        provider.orNull shouldBe 42
     }
 
     @Test
@@ -160,8 +142,7 @@ class ProjectPropertiesTest {
 
         val provider = project.intProviderFromProjectProperty("testProperty")
 
-        assertThat(provider.orNull)
-            .isEqualTo(42)
+        provider.orNull shouldBe 42
     }
 
     @Test
@@ -171,25 +152,21 @@ class ProjectPropertiesTest {
 
         val provider = project.intProviderFromProjectProperty("testProperty")
 
-        assertThat { provider.get() }
-            .isFailure()
-            .isInstanceOf(IllegalArgumentException::class)
+        shouldThrow<IllegalArgumentException> { provider.get() }
     }
 
     @Test
     fun `intProviderFromProjectProperty_should not have a value if project property is not set`() {
         val provider = project.intProviderFromProjectProperty("testProperty")
 
-        assertThat(provider.orNull)
-            .isNull()
+        provider.orNull shouldBe null
     }
 
     @Test
     fun `intProviderFromProjectProperty_should use the default value if project property is not set`() {
         val provider = project.intProviderFromProjectProperty("testProperty", 123)
 
-        assertThat(provider.orNull)
-            .isEqualTo(123)
+        provider.orNull shouldBe 123
     }
 
     @Test
@@ -199,8 +176,7 @@ class ProjectPropertiesTest {
 
         val provider = project.intProviderFromProjectProperty("testProperty", 123)
 
-        assertThat(provider.orNull)
-            .isEqualTo(42)
+        provider.orNull shouldBe 42
     }
 
     @Test
@@ -210,7 +186,7 @@ class ProjectPropertiesTest {
 
         val provider = project.dirProviderFromProjectProperty("testProperty")
 
-        assertThat(provider.asFile().get().absolutePath.replace('\\', '/').endsWith("/foo/bar")).isTrue()
+        provider.asFile().get().absolutePath.replace('\\', '/') should endWith("/foo/bar")
     }
 
     @Test
@@ -220,31 +196,28 @@ class ProjectPropertiesTest {
 
         val provider = project.dirProviderFromProjectProperty("testProperty")
 
-        assertThat(provider.asFile().orNull)
-            .isEqualTo(project.projectDir.resolve("foo/bar"))
+        provider.asFile().orNull shouldBe project.projectDir.resolve("foo/bar")
     }
 
     @Test
     fun `dirProviderFromProjectProperty_should not have a value if project property is not set`() {
         val provider = project.dirProviderFromProjectProperty("testProperty")
 
-        assertThat(provider.orNull)
-            .isNull()
+        provider.orNull shouldBe null
     }
 
     @Test
     fun `dirProviderFromProjectProperty_should use the default value if project property is not set`() {
         val provider = project.dirProviderFromProjectProperty("testProperty", "/default/path")
 
-        assertThat(provider.asFile().get().absolutePath.replace('\\', '/').endsWith("/default/path")).isTrue()
+        provider.asFile().get().absolutePath.replace('\\', '/') should endWith("/default/path")
     }
 
     @Test
     fun `dirProviderFromProjectProperty_should use the project dir as base for relative path in default value`() {
         val provider = project.dirProviderFromProjectProperty("testProperty", "default/path")
 
-        assertThat(provider.asFile().orNull)
-            .isEqualTo(project.projectDir.resolve("default/path"))
+        provider.asFile().orNull shouldBe project.projectDir.resolve("default/path")
     }
 
     @Test
@@ -254,7 +227,7 @@ class ProjectPropertiesTest {
 
         val provider = project.dirProviderFromProjectProperty("testProperty", "/default/path")
 
-        assertThat(provider.asFile().get().absolutePath.replace('\\', '/').endsWith("/foo/bar")).isTrue()
+        provider.asFile().get().absolutePath.replace('\\', '/') should endWith("/foo/bar")
     }
 
     @Test
@@ -265,7 +238,7 @@ class ProjectPropertiesTest {
 
         val provider = project.dirProviderFromProjectProperty("testProperty", evaluateGString = true)
 
-        assertThat(provider.asFile().get().absolutePath.replace('\\', '/').endsWith("/foo/bar")).isTrue()
+        provider.asFile().get().absolutePath.replace('\\', '/') should endWith("/foo/bar")
     }
 
     @Test
@@ -275,7 +248,7 @@ class ProjectPropertiesTest {
 
         val provider = project.fileProviderFromProjectProperty("testProperty")
 
-        assertThat(provider.asFile().get().absolutePath.replace('\\', '/').endsWith("/foo/bar")).isTrue()
+        provider.asFile().get().absolutePath.replace('\\', '/') should endWith("/foo/bar")
     }
 
     @Test
@@ -285,31 +258,28 @@ class ProjectPropertiesTest {
 
         val provider = project.fileProviderFromProjectProperty("testProperty")
 
-        assertThat(provider.asFile().orNull)
-            .isEqualTo(project.projectDir.resolve("foo/bar"))
+        provider.asFile().orNull shouldBe project.projectDir.resolve("foo/bar")
     }
 
     @Test
     fun `fileProviderFromProjectProperty_should not have a value if project property is not set`() {
         val provider = project.fileProviderFromProjectProperty("testProperty")
 
-        assertThat(provider.orNull)
-            .isNull()
+        provider.orNull shouldBe null
     }
 
     @Test
     fun `fileProviderFromProjectProperty_should use the default value if project property is not set`() {
         val provider = project.fileProviderFromProjectProperty("testProperty", "/default/path")
 
-        assertThat(provider.asFile().get().absolutePath.replace('\\', '/').endsWith("/default/path")).isTrue()
+        provider.asFile().get().absolutePath.replace('\\', '/') should endWith("/default/path")
     }
 
     @Test
     fun `fileProviderFromProjectProperty_should use the project dir as base for relative path in default value`() {
         val provider = project.fileProviderFromProjectProperty("testProperty", "default/path")
 
-        assertThat(provider.asFile().orNull)
-            .isEqualTo(project.projectDir.resolve("default/path"))
+        provider.asFile().orNull shouldBe project.projectDir.resolve("default/path")
     }
 
     @Test
@@ -319,7 +289,7 @@ class ProjectPropertiesTest {
 
         val provider = project.fileProviderFromProjectProperty("testProperty", "/default/path")
 
-        assertThat(provider.asFile().get().absolutePath.replace('\\', '/').endsWith("/foo/bar")).isTrue()
+        provider.asFile().get().absolutePath.replace('\\', '/') should endWith("/foo/bar")
     }
 
     @Test
@@ -330,7 +300,7 @@ class ProjectPropertiesTest {
 
         val provider = project.fileProviderFromProjectProperty("testProperty", evaluateGString = true)
 
-        assertThat(provider.asFile().get().absolutePath.replace('\\', '/').endsWith("/foo/bar")).isTrue()
+        provider.asFile().get().absolutePath.replace('\\', '/') should endWith("/foo/bar")
     }
 
     @Test
@@ -340,8 +310,7 @@ class ProjectPropertiesTest {
 
         val provider = project.durationProviderFromProjectProperty("testProperty")
 
-        assertThat(provider.orNull)
-            .isEqualTo(Duration.ofSeconds(42))
+        provider.orNull shouldBe Duration.ofSeconds(42)
     }
 
     @Test
@@ -351,8 +320,7 @@ class ProjectPropertiesTest {
 
         val provider = project.durationProviderFromProjectProperty("testProperty")
 
-        assertThat(provider.orNull)
-            .isEqualTo(Duration.ofSeconds(3 * 60 + 30))
+        provider.orNull shouldBe Duration.ofSeconds(3 * 60 + 30)
     }
 
     @Test
@@ -362,8 +330,7 @@ class ProjectPropertiesTest {
 
         val provider = project.durationProviderFromProjectProperty("testProperty")
 
-        assertThat(provider.orNull)
-            .isEqualTo(Duration.ofSeconds(3 * 60 + 30))
+        provider.orNull shouldBe Duration.ofSeconds(3 * 60 + 30)
     }
 
     @Test
@@ -373,24 +340,21 @@ class ProjectPropertiesTest {
 
         val provider = project.durationProviderFromProjectProperty("testProperty")
 
-        assertThat(provider.orNull)
-            .isEqualTo(Duration.ofSeconds(42))
+        provider.orNull shouldBe Duration.ofSeconds(42)
     }
 
     @Test
     fun `durationProviderFromProjectProperty_should not have a value if project property is not set`() {
         val provider = project.durationProviderFromProjectProperty("testProperty")
 
-        assertThat(provider.orNull)
-            .isNull()
+        provider.orNull shouldBe null
     }
 
     @Test
     fun `durationProviderFromProjectProperty_should use the default value if project property is not set`() {
         val provider = project.durationProviderFromProjectProperty("testProperty", Duration.ofSeconds(32))
 
-        assertThat(provider.orNull)
-            .isEqualTo(Duration.ofSeconds(32))
+        provider.orNull shouldBe Duration.ofSeconds(32)
     }
 
     @Test
@@ -400,7 +364,6 @@ class ProjectPropertiesTest {
 
         val provider = project.durationProviderFromProjectProperty("testProperty", Duration.ofSeconds(32))
 
-        assertThat(provider.orNull)
-            .isEqualTo(Duration.ofSeconds(7 * 60 + 42))
+        provider.orNull shouldBe Duration.ofSeconds(7 * 60 + 42)
     }
 }
