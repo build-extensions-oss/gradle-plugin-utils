@@ -260,20 +260,20 @@ class RuleNamePattern2(
 
 
     private fun <T, U> Iterable<T>.combineWith(other: Iterable<U>) =
-        sequence {
+        buildList {
             for (item1 in this@combineWith) {
                 for (item2 in other) {
-                    yield(item1 to item2)
+                    add(item1 to item2)
                 }
             }
         }
 
 
     private fun <T, U> Iterable<T>.combineWithInner(innerFunction: (T) -> Iterable<U>) =
-        sequence {
+        buildList {
             for (item1 in this@combineWithInner) {
                 for (item2 in innerFunction(item1)) {
-                    yield(item1 to item2)
+                    add(item1 to item2)
                 }
             }
         }
