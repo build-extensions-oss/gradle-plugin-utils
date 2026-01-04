@@ -13,6 +13,8 @@ dependencies {
     testImplementation(libs.kotest.property)
     testImplementation(libs.assertk.core)
     testImplementation(libs.mockk)
+
+    testRuntimeOnly(libs.junitEngine)
 }
 
 /**

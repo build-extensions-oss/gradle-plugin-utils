@@ -37,7 +37,7 @@ private object GradleProjectDirStoreKey
 
 internal val ExtensionContext.projectDir: File
     get() {
-        val resource = store.getOrComputeIfAbsent(GradleProjectDirStoreKey, {
+        val resource = store.computeIfAbsent(GradleProjectDirStoreKey, {
             GradleProjectDirResource().also { resource ->
                 initGradleProject(resource.directory)
             }
