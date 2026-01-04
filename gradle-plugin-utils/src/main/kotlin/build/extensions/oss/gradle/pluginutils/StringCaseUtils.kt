@@ -12,20 +12,20 @@ package build.extensions.oss.gradle.pluginutils
  * @receiver the string to split into words
  * @return a [Sequence] of words in the string
  */
-fun String.splitIntoWords(): Sequence<String> = sequence {
+fun String.splitIntoWords(): List<String> = buildList {
     val builder = StringBuilder()
 
     this@splitIntoWords.forEach { ch ->
         if (ch.isUpperCase()) {
             if (builder.isNotEmpty()) {
-                yield(builder.toString())
+                add(builder.toString())
                 builder.setLength(0)
             }
             builder.append(ch.lowercaseChar())
 
         } else if (!ch.isLetterOrDigit()) {
             if (builder.isNotEmpty()) {
-                yield(builder.toString())
+                add(builder.toString())
                 builder.setLength(0)
             }
 
@@ -35,7 +35,7 @@ fun String.splitIntoWords(): Sequence<String> = sequence {
     }
 
     if (builder.isNotEmpty()) {
-        yield(builder.toString())
+        add(builder.toString())
     }
 }
 
