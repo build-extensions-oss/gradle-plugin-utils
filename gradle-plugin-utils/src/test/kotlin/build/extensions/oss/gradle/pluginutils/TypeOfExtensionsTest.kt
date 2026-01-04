@@ -1,8 +1,7 @@
 package build.extensions.oss.gradle.pluginutils
 
-import assertk.assertThat
-import assertk.assertions.isEqualTo
 import io.kotest.core.spec.style.DescribeSpec
+import io.kotest.matchers.shouldBe
 import org.gradle.api.reflect.TypeOf
 
 
@@ -16,8 +15,7 @@ class TypeOfExtensionsTest : DescribeSpec({
             val type = typeOf<SimpleType>()
             val expectedType = TypeOf.typeOf(SimpleType::class.java)
 
-            assertThat(type)
-                .isEqualTo(expectedType)
+            type shouldBe expectedType
         }
 
 
@@ -26,8 +24,7 @@ class TypeOfExtensionsTest : DescribeSpec({
             val type = typeOf<Array<SimpleType>>()
             val expectedType = TypeOf.typeOf(Array<SimpleType>::class.java)
 
-            assertThat(type)
-                .isEqualTo(expectedType)
+            type shouldBe expectedType
         }
 
 
@@ -37,8 +34,7 @@ class TypeOfExtensionsTest : DescribeSpec({
 
             val expectedType = object : TypeOf<Pair<String, SimpleType>>() {}
 
-            assertThat(type)
-                .isEqualTo(expectedType)
+            type shouldBe expectedType
         }
     }
 })

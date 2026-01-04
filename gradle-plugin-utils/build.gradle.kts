@@ -11,7 +11,6 @@ dependencies {
     testImplementation(libs.junit.jupiter.params)
     testImplementation(libs.kotest.runner)
     testImplementation(libs.kotest.property)
-    testImplementation(libs.assertk.core)
     testImplementation(libs.mockk)
 
     testRuntimeOnly(libs.junitEngine)
