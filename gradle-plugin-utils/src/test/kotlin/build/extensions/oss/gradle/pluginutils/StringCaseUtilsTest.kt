@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 
-class StringCaseUtilsTest2 {
+class StringCaseUtilsTest {
     @Test
     fun `single word`() {
         val words = "word".splitIntoWords().toList()
@@ -35,5 +35,3 @@ class StringCaseUtilsTest2 {
         assertThat(words).isEqualTo(expectedWords)
     }
 }
-
-
