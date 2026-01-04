@@ -3,41 +3,35 @@ package build.extensions.oss.gradle.pluginutils
 import assertk.assertThat
 import assertk.assertions.containsExactly
 import assertk.assertions.isEqualTo
-import io.kotest.core.spec.style.StringSpec
-import io.kotest.property.Exhaustive
-import io.kotest.property.checkAll
-import io.kotest.property.exhaustive.of
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.ValueSource
 
-
-class StringCaseUtilsTest : StringSpec({
-
-    "single word" {
-
+class StringCaseUtilsTest {
+    @Test
+    fun `single word`() {
         val words = "word".splitIntoWords().toList()
 
         assertThat(words)
             .containsExactly("word")
     }
 
-    "two words camel case" {
-
+    @Test
+    fun `two words camel case`() {
         val words = "twoWords".splitIntoWords().toList()
 
         assertThat(words)
             .containsExactly("two", "words")
     }
 
-    "two words with separator" {
+    @ParameterizedTest
+    @ValueSource(chars = [' ', '-', '_', '.', '/'])
+    fun `two words with separator`(separator: Char) {
+        val expectedWords = listOf("two", "words")
+        val concatenated = expectedWords.joinToString(separator = separator.toString())
 
-        val separators = Exhaustive.of(' ', '-', '_', '.', '/')
+        val words = concatenated.splitIntoWords().toList()
 
-        checkAll(separators) { separator ->
-            val expectedWords = listOf("two", "words")
-            val concatenated = expectedWords.joinToString(separator = separator.toString())
-
-            val words = concatenated.splitIntoWords().toList()
-
-            assertThat(words).isEqualTo(expectedWords)
-        }
+        assertThat(words).isEqualTo(expectedWords)
     }
-})
+}

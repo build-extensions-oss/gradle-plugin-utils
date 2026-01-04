@@ -115,7 +115,7 @@ public final class build/extensions/oss/gradle/pluginutils/StringCaseUtilsKt {
 	public static final fun capitalizeWords (Ljava/lang/String;Z)Ljava/lang/String;
 	public static synthetic fun capitalizeWords$default (Ljava/lang/String;ZILjava/lang/Object;)Ljava/lang/String;
 	public static final fun decapitalize (Ljava/lang/String;)Ljava/lang/String;
-	public static final fun splitIntoWords (Ljava/lang/String;)Lkotlin/sequences/Sequence;
+	public static final fun splitIntoWords (Ljava/lang/String;)Ljava/util/List;
 }
 
 public final class build/extensions/oss/gradle/pluginutils/SystemUtils {
