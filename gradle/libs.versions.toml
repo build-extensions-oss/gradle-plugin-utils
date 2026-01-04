@@ -22,7 +22,7 @@ reflections = { module = "org.reflections:reflections", version.ref = "reflectio
 
 spek-dsl = { module = "org.spekframework.spek2:spek-dsl", version.ref = "spek2" }
 
-org-jetbrains-kotlinx-kover = { module = "org.jetbrains.kotlinx:kover-gradle-plugin", version = "0.9.3" }
+org-jetbrains-kotlinx-kover = { module = "org.jetbrains.kotlinx:kover-gradle-plugin", version = "0.9.4" }
 
 # this plugin is referenced in buildSrc
 com-vanniktech-maven-publish-gradle-plugin = { module = "com.vanniktech.maven.publish:com.vanniktech.maven.publish.gradle.plugin", version = "0.34.0" }
