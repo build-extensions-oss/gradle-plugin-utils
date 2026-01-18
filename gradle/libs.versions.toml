@@ -27,7 +27,7 @@ spek-dsl = { module = "org.spekframework.spek2:spek-dsl", version.ref = "spek2" 
 org-jetbrains-kotlinx-kover = { module = "org.jetbrains.kotlinx:kover-gradle-plugin", version = "0.9.4" }
 
 # this plugin is referenced in buildSrc
-com-vanniktech-maven-publish-gradle-plugin = { module = "com.vanniktech.maven.publish:com.vanniktech.maven.publish.gradle.plugin", version = "0.35.0" }
+com-vanniktech-maven-publish-gradle-plugin = { module = "com.vanniktech.maven.publish:com.vanniktech.maven.publish.gradle.plugin", version = "0.36.0" }
 
 # https://github.com/detekt/detekt
 # It must be compatible with Kotlin version, therefore it must be also compatible with Gradle (we use the version of the embedded Kotlin)
