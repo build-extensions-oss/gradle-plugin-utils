@@ -23,7 +23,7 @@ private val ExtensionContext.store: ExtensionContext.Store
     get() = getStore(namespace)
 
 
-private class GradleProjectDirResource : ExtensionContext.Store.CloseableResource {
+private class GradleProjectDirResource : AutoCloseable {
 
     val directory: File = Files.createTempDirectory("gradle").toFile()
 
@@ -92,7 +92,6 @@ internal fun ExtensionContext.setupProjectDir(initializer: (projectDir: File) ->
         this.projectDirInitializer + ProjectDirInitializer { projectDir, _ -> initializer(projectDir) }
     )
 }
-
 
 
 /**

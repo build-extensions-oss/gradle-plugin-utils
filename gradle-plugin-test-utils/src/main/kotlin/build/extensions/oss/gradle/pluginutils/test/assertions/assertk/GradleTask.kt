@@ -2,6 +2,7 @@ package build.extensions.oss.gradle.pluginutils.test.assertions.assertk
 
 import assertk.Assert
 import assertk.assertions.containsAll
+import assertk.assertions.containsAtLeast
 import assertk.assertions.containsOnly
 import assertk.assertions.support.expected
 import assertk.assertions.support.show
@@ -64,7 +65,7 @@ fun Assert<Task>.hasTaskDependencies(vararg taskNames: String, exactly: Boolean 
     if (exactly) {
         assert.containsOnly(*taskNames)
     } else {
-        assert.containsAll(*taskNames)
+        assert.containsAtLeast(*taskNames)
     }
 }
 
