@@ -71,6 +71,7 @@ internal class GradleVersionsExtension : BeforeAllCallback, BeforeEachCallback, 
             }
     }
 
+    @Suppress("UnusedPrivateMember") // suppress detekt exception - it doesn't have good support of Kotlin 2.0
     private fun GradleVersions.parseVersions(): List<String> =
         value.asSequence()
             .flatMap { parseVersions(it) }
