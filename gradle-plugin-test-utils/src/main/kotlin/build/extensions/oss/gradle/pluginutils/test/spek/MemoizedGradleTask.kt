@@ -16,6 +16,7 @@ import kotlin.reflect.KClass
  * @param name the task name
  * @param config an optional block for configuring the task
  */
+@Deprecated("Code below uses obsolete API. It won't work stable with new version of Gradle")
 fun <T : Task> LifecycleAware.gradleTask(
     taskType: KClass<T>,
     name: String? = null,
